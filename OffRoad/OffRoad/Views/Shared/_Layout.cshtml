@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@{var currentUser = HttpContext.Current.User.Identity.Name;}
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -23,8 +24,15 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
-                    <li>@Html.ActionLink("À propos de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @if (currentUser != "")
+                    {
+                        <li>@Html.ActionLink("Deconnexion", "LogOut", "Auth")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Connexion", "LogIn", "Auth")</li>
+                    }
+                    
                 </ul>
             </div>
         </div>
