@@ -130,19 +130,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201510281033536_User2.cs" />
-    <Compile Include="Migrations\201510281033536_User2.Designer.cs">
-      <DependentUpon>201510281033536_User2.cs</DependentUpon>
+    <Compile Include="Migrations\201511121426583_add categoryEventEventUser.cs" />
+    <Compile Include="Migrations\201511121426583_add categoryEventEventUser.Designer.cs">
+      <DependentUpon>201511121426583_add categoryEventEventUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201510281128576_Role + UserRole.cs" />
-    <Compile Include="Migrations\201510281128576_Role + UserRole.Designer.cs">
-      <DependentUpon>201510281128576_Role + UserRole.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510281424338_User -requierd nom\prenom.cs" />
-    <Compile Include="Migrations\201510281424490_User -requierd nom_prenom.cs" />
-    <Compile Include="Migrations\201510281424490_User -requierd nom_prenom.Designer.cs">
-      <DependentUpon>201510281424490_User -requierd nom_prenom.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Article.cs" />
+    <Compile Include="Models\Avatar.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\ArticleComment.cs" />
+    <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\EventUser.cs" />
     <Compile Include="Models\LogIn.cs" />
     <Compile Include="Models\Register.cs" />
     <Compile Include="Models\Roles.cs" />
@@ -199,14 +196,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201510281033536_User2.resx">
-      <DependentUpon>201510281033536_User2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510281128576_Role + UserRole.resx">
-      <DependentUpon>201510281128576_Role + UserRole.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510281424490_User -requierd nom_prenom.resx">
-      <DependentUpon>201510281424490_User -requierd nom_prenom.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201511121426583_add categoryEventEventUser.resx">
+      <DependentUpon>201511121426583_add categoryEventEventUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

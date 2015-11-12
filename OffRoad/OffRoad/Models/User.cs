@@ -39,5 +39,7 @@ namespace OffRoad.Models
 
         [Display(Name = "Sexe")]
         public int Gender { get; set; }
+
+        public Avatar Avatar { get; set; }
     }
 }
