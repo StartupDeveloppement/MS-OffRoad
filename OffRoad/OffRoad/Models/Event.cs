@@ -11,26 +11,30 @@ namespace OffRoad.Models
         [Key]
         public int Id { get; set; }
 
+        [Display(Name = "Titre")]
         [Required]
-        public string Text { get; set; }
+        public string Title { get; set; }
         
         [Required]
         public string Description { get; set; }
 
         [Required]
-        public DateTime CreateDate { get; set; }
+        public Nullable<DateTime> CreateDate { get; set; }
 
+        [Display(Name = "Date de début")]
         [Required]
         public DateTime BeginDate { get; set; }
 
+        [Display(Name = "Date de fin")]
         [Required]
         public DateTime EndDate { get; set; }
 
+        [Display(Name = "Lieu")]
         [Required]
         public string Place { get; set; }
 
         [Required]
-        public User Owner { get; set; }
+        public virtual User Owner { get; set; }
 
     }
 }
