@@ -7,13 +7,13 @@ namespace OffRoad.Context
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class addcategoryEventEventUser : IMigrationMetadata
+    public sealed partial class Migration2 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addcategoryEventEventUser));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Migration2));
         
         string IMigrationMetadata.Id
         {
-            get { return "201511121426583_add categoryEventEventUser"; }
+            get { return "201511180914328_Migration2"; }
         }
         
         string IMigrationMetadata.Source

@@ -127,13 +127,18 @@
     <Compile Include="Context\DBContext.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201511121426583_add categoryEventEventUser.cs" />
-    <Compile Include="Migrations\201511121426583_add categoryEventEventUser.Designer.cs">
-      <DependentUpon>201511121426583_add categoryEventEventUser.cs</DependentUpon>
+    <Compile Include="Migrations\201511180844241_Migration.cs" />
+    <Compile Include="Migrations\201511180844241_Migration.Designer.cs">
+      <DependentUpon>201511180844241_Migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511180914328_Migration2.cs" />
+    <Compile Include="Migrations\201511180914328_Migration2.Designer.cs">
+      <DependentUpon>201511180914328_Migration2.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Avatar.cs" />
@@ -191,6 +196,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Auth\LogIn.cshtml" />
     <Content Include="Views\Auth\Register.cshtml" />
+    <Content Include="Views\Events\Create.cshtml" />
+    <Content Include="Views\Events\Delete.cshtml" />
+    <Content Include="Views\Events\Details.cshtml" />
+    <Content Include="Views\Events\Edit.cshtml" />
+    <Content Include="Views\Events\Index.cshtml" />
     <Content Include="Views\Articles\Create.cshtml" />
     <Content Include="Views\Articles\Delete.cshtml" />
     <Content Include="Views\Articles\Details.cshtml" />
@@ -208,8 +218,11 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511121426583_add categoryEventEventUser.resx">
-      <DependentUpon>201511121426583_add categoryEventEventUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201511180844241_Migration.resx">
+      <DependentUpon>201511180844241_Migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511180914328_Migration2.resx">
+      <DependentUpon>201511180914328_Migration2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
