@@ -1,0 +1,17 @@
+﻿#logo{
+    position: fixed;
+}
+
+.icon{
+    width:20px;
+    height:20px;
+}
+
+a{
+    font-family:Myriad Pro;
+    font-weight:bold;
+}
+
+a:hover{
+    color:green !important;
+}

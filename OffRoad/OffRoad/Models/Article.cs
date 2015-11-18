@@ -17,7 +17,7 @@ namespace OffRoad.Models
 
         [Required]
         [Display(Name = "Date de création")]
-        public DateTime CreateDate { get; set; }
+        public Nullable <DateTime>CreateDate { get; set; }
 
         [Required]
         [Display(Name = "Titre")]
