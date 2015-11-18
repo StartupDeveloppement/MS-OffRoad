@@ -132,13 +132,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201511180844241_Migration.cs" />
-    <Compile Include="Migrations\201511180844241_Migration.Designer.cs">
-      <DependentUpon>201511180844241_Migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511180914328_Migration2.cs" />
-    <Compile Include="Migrations\201511180914328_Migration2.Designer.cs">
-      <DependentUpon>201511180914328_Migration2.cs</DependentUpon>
+    <Compile Include="Migrations\201511181521283_Evenement.cs" />
+    <Compile Include="Migrations\201511181521283_Evenement.Designer.cs">
+      <DependentUpon>201511181521283_Evenement.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Avatar.cs" />
@@ -218,11 +214,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511180844241_Migration.resx">
-      <DependentUpon>201511180844241_Migration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511180914328_Migration2.resx">
-      <DependentUpon>201511180914328_Migration2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201511181521283_Evenement.resx">
+      <DependentUpon>201511181521283_Evenement.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
