@@ -132,6 +132,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hash\PasswordHash.cs" />
     <Compile Include="Migrations\201511181521283_Evenement.cs" />
     <Compile Include="Migrations\201511181521283_Evenement.Designer.cs">
       <DependentUpon>201511181521283_Evenement.cs</DependentUpon>

@@ -93,6 +93,7 @@ namespace OffRoad.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Text,CreateDate,Title,PicturePath")] Article article)
         {
+
             if (ModelState.IsValid)
             {
                 db.Entry(article).State = EntityState.Modified;

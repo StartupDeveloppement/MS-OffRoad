@@ -1,5 +1,7 @@
 ﻿#logo{
     position: fixed;
+    width : 113px;
+    height: 90px;
 }
 
 .icon{
@@ -14,4 +16,18 @@ a{
 
 a:hover{
     color:green !important;
+}
+
+footer{
+    min-height:100px;
+    width:100%;
+    bottom:0px;
+    background-color:#222222;
+    color:white;
+}
+
+footer label{
+    padding:10px 0px;
+    font-size:26px;
+    font-family:Arial;
 }

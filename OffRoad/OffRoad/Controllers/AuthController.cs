@@ -121,8 +121,7 @@ namespace OffRoad.Controllers
                 }
             }
 
-
-            return View();
+            return RedirectToAction("LogIn");
         }
 
         #endregion

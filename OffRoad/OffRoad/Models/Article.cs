@@ -27,11 +27,11 @@ namespace OffRoad.Models
 
         [Required]
         [Display(Name = "Catégorie")]
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
 
         [Required]
         [Display(Name = "Auteur")]
-        public User Author { get; set; }
+        public virtual User Author { get; set; }
 
     }
 }

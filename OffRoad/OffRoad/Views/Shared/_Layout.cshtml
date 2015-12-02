@@ -20,9 +20,10 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div class="col-md-5">
-                    <img src="~/Content/Image/Logo.png" id="logo" class="" />
-                </div>
-                
+                    <a href='@Url.Action("Index", "Home")'>
+                        <img src="~/Content/Image/Logo.png" id="logo"  />
+                    </a>
+                </div>              
             </div>
             <div class="navbar-collapse collapse navbar-right" >
                 <ul class="nav navbar-nav">
@@ -62,21 +63,49 @@
                             </a>
                         </li>
                     }
-                    
                 </ul>
             </div>
-            
         </div>
     </div>
 
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
-
+    <footer>
+        <div class="container">
+            <div class="col-md-4">
+                <label>A PROPOS DE NOUS</label>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi finibus maximus sem nec aliquam.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sed efficitur erat, eget rhoncus massa. 
+                    Vivamus eu varius nulla. Mauris ex lacus, feugiat eu nunc nec, pharetra suscipit felis. Donec id lacus mi. 
+                    Morbi interdum aliquam eros at rhoncus. Phasellus a tincidunt est, ac scelerisque risu
+                </p>
+            </div>
+            <div class="col-md-4">
+                <label>LIENS UTILES</label>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div>@Html.ActionLink("Accueil", "Index", new { Controller = "Home" }, null)</div>
+                        <div>@Html.ActionLink("Article", "Index", new { Controller = "Articles" }, null)</div>
+                        <div>@Html.ActionLink("Evenements", "Index", new { Controller = "Events" }, null)</div>
+                    </div>
+                    <div class="col-md-4">
+                        <div><a href="https://www.twitter.com">Twitter</a></div>
+                        <div><a href="https://www.facebook.com/offroad.biketeam?fref=ts">Facebook</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label>NOUS CONTACTER</label>
+                <p>
+                    Pour nous contacter, vous pouvez passer par notre page <a href="https://www.facebook.com/offroad.biketeam?fref=ts">Facebook</a> ou <a href="https://www.twitter.com">Twitter</a>,
+                    ou passer par @Html.ActionLink("ici", "Contact", new { Controller = "Home" }, null).
+                </p>
+            </div>
+        </div>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
