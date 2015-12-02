@@ -29,6 +29,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Place)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EditDate)
+        </th>
         <th></th>
     </tr>
 
@@ -44,13 +47,16 @@
             @Html.DisplayFor(modelItem => item.CreateDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.BeginDate)
+            @item.BeginDate.Value.ToString("dd/MMM/yyyy")
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EndDate)
+            @item.EndDate.Value.ToString("dd/MMM/yyyy")
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Place)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EditDate)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

@@ -11,16 +11,20 @@ using OffRoad.Models;
 
 namespace OffRoad.Controllers
 {
+    [Authorize]
     public class EventsController : Controller
     {
         private DBContext db = new DBContext();
+        private static DateTime? createDateSave = DateTime.MinValue;
 
+        [AllowAnonymous]
         // GET: Events
         public ActionResult Index()
         {
             return View(db.Events.ToList());
         }
 
+        [AllowAnonymous]
         // GET: Events/Details/5
         public ActionResult Details(int? id)
         {
@@ -28,12 +32,12 @@ namespace OffRoad.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = db.Events.Find(id);
-            if (@event == null)
+            Event evenement = db.Events.Find(id);
+            if (evenement == null)
             {
                 return HttpNotFound();
             }
-            return View(@event);
+            return View(evenement);
         }
 
         // GET: Events/Create
@@ -47,19 +51,24 @@ namespace OffRoad.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,CreateDate,Description,BeginDate,EndDate,Place,Owner")] Event @event)
+        public ActionResult Create([Bind(Include = "Id,Title,Description,BeginDate,EndDate,Place,Owner")] Event evenement)
         {
             User user = db.Users.FirstOrDefault(u => u.NickName == User.Identity.Name);
             ModelState.Remove("Owner");
+            if (evenement.BeginDate > evenement.EndDate)
+            {
+                ModelState.AddModelError("", "La date de début est supérieure à la date de fin de l'évenement");
+                return View(evenement);
+            }
             if (ModelState.IsValid)
             {
-                @event.Owner = user;
-                @event.CreateDate = DateTime.Now;
-                db.Events.Add(@event);
+                evenement.Owner = user;
+                evenement.CreateDate = DateTime.Now;
+                db.Events.Add(evenement);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(@event);
+            return View(evenement);
         }
 
         // GET: Events/Edit/5
@@ -69,12 +78,16 @@ namespace OffRoad.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = db.Events.Find(id);
-            if (@event == null)
+            Event evenement = db.Events.Find(id);
+            if (evenement == null)
             {
                 return HttpNotFound();
             }
-            return View(@event);
+
+            //Récupération de la date de création
+            createDateSave = evenement.CreateDate;
+
+            return View(evenement);
         }
 
         // POST: Events/Edit/5
@@ -82,18 +95,24 @@ namespace OffRoad.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Description,CreateDate,BeginDate,EndDate,Place, Owner")] Event @event)
+        public ActionResult Edit([Bind(Include = "Id,Title,Description,CreateDate,BeginDate,EndDate,Place")] Event evenement)
         {
-            ModelState.Remove("Owner");
             User user = db.Users.FirstOrDefault(u => u.NickName == User.Identity.Name);
+            evenement.EditDate = DateTime.Now;
+            if (evenement.BeginDate > evenement.EndDate)
+            {
+                ModelState.AddModelError("", "La date de début est supérieure à la date de fin de l'évenement");
+                return View(evenement);
+            }
             if (ModelState.IsValid)
             {
-                @event.Owner = user;
-                db.Entry(@event).State = EntityState.Modified;
+                evenement.CreateDate = createDateSave;
+                evenement.Owner = user;
+                db.Entry(evenement).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(@event);
+            return View(evenement);
         }
 
         // GET: Events/Delete/5
@@ -103,12 +122,12 @@ namespace OffRoad.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = db.Events.Find(id);
-            if (@event == null)
+            Event evenement = db.Events.Find(id);
+            if (evenement == null)
             {
                 return HttpNotFound();
             }
-            return View(@event);
+            return View(evenement);
         }
 
         // POST: Events/Delete/5
@@ -116,8 +135,8 @@ namespace OffRoad.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Event @event = db.Events.Find(id);
-            db.Events.Remove(@event);
+            Event evenement = db.Events.Find(id);
+            db.Events.Remove(evenement);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
