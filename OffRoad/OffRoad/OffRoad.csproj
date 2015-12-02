@@ -132,9 +132,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201511181521283_Evenement.cs" />
-    <Compile Include="Migrations\201511181521283_Evenement.Designer.cs">
-      <DependentUpon>201511181521283_Evenement.cs</DependentUpon>
+    <Compile Include="Migrations\201512021315585_DatedeModif.cs" />
+    <Compile Include="Migrations\201512021315585_DatedeModif.Designer.cs">
+      <DependentUpon>201512021315585_DatedeModif.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Avatar.cs" />
@@ -214,8 +214,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511181521283_Evenement.resx">
-      <DependentUpon>201511181521283_Evenement.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201512021315585_DatedeModif.resx">
+      <DependentUpon>201512021315585_DatedeModif.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

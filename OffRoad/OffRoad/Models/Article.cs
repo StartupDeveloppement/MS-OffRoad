@@ -15,21 +15,23 @@ namespace OffRoad.Models
         [Display(Name = "Corps")]
         public string Text { get; set; }
 
-        [Required]
         [Display(Name = "Date de création")]
-        public Nullable <DateTime>CreateDate { get; set; }
+        public Nullable<DateTime> CreateDate { get; set; }
+
+        [Display(Name = "Date de modification")]
+        public Nullable <DateTime>EditDate { get; set; }
 
         [Required]
         [Display(Name = "Titre")]
         public string Title { get; set; }
 
+        [Required]
+        [Display(Name = "Image")]
         public string PicturePath { get; set; }
 
-        [Required]
         [Display(Name = "Catégorie")]
         public Category Category { get; set; }
 
-        [Required]
         [Display(Name = "Auteur")]
         public User Author { get; set; }
 

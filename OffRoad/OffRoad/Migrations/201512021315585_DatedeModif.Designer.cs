@@ -7,18 +7,18 @@ namespace OffRoad.Context
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class Evenement : IMigrationMetadata
+    public sealed partial class DatedeModif : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Evenement));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(DatedeModif));
         
         string IMigrationMetadata.Id
         {
-            get { return "201511181521283_Evenement"; }
+            get { return "201512021315585_DatedeModif"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return null; }
+            get { return Resources.GetString("Source"); }
         }
         
         string IMigrationMetadata.Target

@@ -11,16 +11,20 @@ using OffRoad.Models;
 
 namespace OffRoad.Controllers
 {
+    [Authorize]
     public class ArticlesController : Controller
     {
         private DBContext db = new DBContext();
+        private static DateTime? createDateSave = DateTime.MinValue;
 
+        [AllowAnonymous]
         // GET: Articles
         public ActionResult Index()
         {
             return View(db.Articles.ToList());
         }
 
+        [AllowAnonymous]
         // GET: Articles/Details/5
         public ActionResult Details(int? id)
         {
@@ -39,6 +43,7 @@ namespace OffRoad.Controllers
         // GET: Articles/Create
         public ActionResult Create()
         {
+            ViewBag.Categories = db.Categorys.ToList();
             return View();
         }
 
@@ -47,19 +52,22 @@ namespace OffRoad.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Text,CreateDate,Title,PicturePath,Author")] Article article)
+        public ActionResult Create([Bind(Include = "Id,Text,Title,PicturePath")] Article article)
         {
-            User users = db.Users.FirstOrDefault(u => u.NickName == HttpContext.User.Identity.Name );
-            Category cat = db.Categorys.FirstOrDefault(u => u.Id == 1);
+            User user = db.Users.FirstOrDefault(u => u.NickName == HttpContext.User.Identity.Name );
+            
+            //Récupération de la catégory
+            var categoryForm = Request.Form["Category"];
+            int idCategory = Int32.Parse(categoryForm);
+            var requete = from b in db.Categorys
+                          where b.Id.Equals(idCategory)
+                          select b;
+            Category category = requete.FirstOrDefault();
 
-            article.Author = users;
-            article.Category = cat;
-
+            //Persistance des données non requises
+            article.Author = user;
             article.CreateDate = DateTime.Now;
-
-            ModelState.Remove("Author");
-            ModelState.Remove("Category");
-            ModelState.Remove("CreateDate");
+            article.Category = category;
 
             if (ModelState.IsValid)
             {
@@ -83,6 +91,9 @@ namespace OffRoad.Controllers
             {
                 return HttpNotFound();
             }
+            //Récupération de la date de création
+            createDateSave = article.CreateDate;
+
             return View(article);
         }
 
@@ -93,8 +104,10 @@ namespace OffRoad.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Text,CreateDate,Title,PicturePath")] Article article)
         {
+            article.EditDate = DateTime.Now;
             if (ModelState.IsValid)
             {
+                article.CreateDate = createDateSave;
                 db.Entry(article).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
