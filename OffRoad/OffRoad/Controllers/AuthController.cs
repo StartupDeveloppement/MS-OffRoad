@@ -26,10 +26,10 @@ namespace OffRoad.Controllers
         }
 
         [HttpGet]
-        public ActionResult LogOut() 
-        { 
+        public ActionResult LogOut()
+        {
             FormsAuthentication.SignOut();
-            return Redirect("/Home/Index"); 
+            return Redirect("/Home/Index");
         }
 
         [HttpGet]
@@ -41,13 +41,13 @@ namespace OffRoad.Controllers
         [HttpPost]
         public ActionResult LogIn(LogIn viewModel)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 User user = Authentifier(viewModel.NickName, viewModel.PassWord);
-                if(user != null)
+                if (user != null)
                 {
                     FormsAuthentication.SetAuthCookie(user.NickName, false);
-                    return RedirectToAction("Index","Home");
+                    return RedirectToAction("Index", "Home");
                 }
 
                 ModelState.AddModelError("LoginError", "Mail et/ou mot de passe incorrect(s)");
@@ -56,7 +56,7 @@ namespace OffRoad.Controllers
 
             return View();
         }
-        
+
         [HttpGet]
         public ActionResult Register()
         {
@@ -66,7 +66,7 @@ namespace OffRoad.Controllers
         [HttpPost]
         public ActionResult Register(Register user)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 // State = 0 Si tout est Ok , State = 1 si probleme détécté
                 int state = 0;
@@ -94,15 +94,15 @@ namespace OffRoad.Controllers
                     }
                 }
 
-                if(!IsExistNickname(user.NickName))
+                if (!IsExistNickname(user.NickName))
                 {
                     state = 1;
                     err += "- Le pseudo est déjà utilisé<br/>";
                 }
 
-                if(state != 0)
+                if (state != 0)
                 {
-                    ModelState.AddModelError("RegisterError", err); 
+                    ModelState.AddModelError("RegisterError", err);
                     return View();
                 }
 
@@ -111,12 +111,12 @@ namespace OffRoad.Controllers
                 {
                     User newuser = AjouterUtilisateur(user.LastName, user.FirstName, user.Password, user.Email, user.NickName);
                     UserRole userrole = new UserRole { IdUser = newuser, Roles = db.Roles.Find(1) };
-                    db.UserRole.Add(userrole);
-                    db.SaveChanges();
-               }
-                catch(Exception ex)
+                    // db.UserRole.Add(userrole);
+                    //  db.SaveChanges();
+                }
+                catch (Exception ex)
                 {
-                    ModelState.AddModelError("RegisterError", ex.Message+" "+ex.InnerException);
+                    ModelState.AddModelError("RegisterError", ex.Message + " " + ex.InnerException);
                     return View();
                 }
             }
@@ -130,9 +130,6 @@ namespace OffRoad.Controllers
 
         /// <summary>
         /// Création de l'utilisateur dans la table USER
-        /// 
-        /// SANS SALT!
-        /// 
         /// </summary>
         /// <param name="lastName"></param>
         /// <param name="firstName"></param>
@@ -140,30 +137,17 @@ namespace OffRoad.Controllers
         /// <param name="email"></param>
         /// <param name="nickname"></param>
         /// <returns>Utilisateur crée</returns>
-        public User AjouterUtilisateur(string lastName, string firstName, string password, string email,string nickname) 
-        { 
-            string passwordHash = HashPassword(password);
-            User utilisateur = new User { FirstName = firstName, LastName = lastName, Email = email, Password = passwordHash, NickName=nickname };
-            utilisateur.Birthday = DateTime.Now; 
+        public User AjouterUtilisateur(string lastName, string firstName, string password, string email, string nickname)
+        {
+            string pwHash;
+
+            pwHash = PasswordHash.CreateHash(password);
+
+            User utilisateur = new User { FirstName = firstName, LastName = lastName, Email = email, Password = pwHash, NickName = nickname };
+            utilisateur.Birthday = DateTime.Now;
             db.Users.Add(utilisateur);
             db.SaveChanges();
-            return utilisateur; 
-        }
-
-        /// <summary>
-        /// Méthode de HASH de mot de passe (MD5)
-        /// </summary>
-        /// <param name="password"></param>
-        /// <returns>MDP hashé</returns>
-        public static string HashPassword(string password)
-        {
-            HashAlgorithm algorithm = MD5.Create();
-            Byte[] hash = algorithm.ComputeHash(Encoding.UTF8.GetBytes(password));
-            StringBuilder sb = new StringBuilder();
-            foreach (byte b in hash)
-                sb.Append(b.ToString("X2"));
-
-            return sb.ToString();
+            return utilisateur;
         }
 
         /// <summary>
@@ -206,9 +190,17 @@ namespace OffRoad.Controllers
         /// <returns>Retourne user si existe sinon null</returns>
         public User Authentifier(string nickname, string password)
         {
-            string motDePasseEncode = HashPassword(password);
+            User user = db.Users.FirstOrDefault(u => u.NickName == nickname);
 
-            return db.Users.FirstOrDefault(u => u.NickName == nickname && u.Password == motDePasseEncode);
+            if (PasswordHash.ValidatePassword(password, user.Password))
+            {
+                return user;
+            }
+            else
+            {
+                return null;
+            }
+
         }
 
         #endregion
