@@ -129,6 +129,8 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Filtre\AuthorizeEventFilter.cs" />
+    <Compile Include="Filtre\AuthorizeRedacFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using OffRoad.Context;
 using OffRoad.Models;
+using OffRoad.Filtre;
 
 namespace OffRoad.Controllers
 {
@@ -41,6 +42,7 @@ namespace OffRoad.Controllers
         }
 
         // GET: Articles/Create
+        [AuthorizeRedacFilter]
         public ActionResult Create()
         {
             ViewBag.Categories = db.Categorys.ToList();
@@ -79,6 +81,7 @@ namespace OffRoad.Controllers
             return View(article);
         }
 
+        [AuthorizeRedacFilter]
         // GET: Articles/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -115,6 +118,7 @@ namespace OffRoad.Controllers
             return View(article);
         }
 
+        [AuthorizeRedacFilter]
         // GET: Articles/Delete/5
         public ActionResult Delete(int? id)
         {

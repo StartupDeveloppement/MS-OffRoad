@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using OffRoad.Context;
 using OffRoad.Models;
+using OffRoad.Filtre;
 
 namespace OffRoad.Controllers
 {
@@ -40,6 +41,7 @@ namespace OffRoad.Controllers
             return View(evenement);
         }
 
+        [AuthorizeEventFilter]
         // GET: Events/Create
         public ActionResult Create()
         {
@@ -71,6 +73,7 @@ namespace OffRoad.Controllers
             return View(evenement);
         }
 
+        [AuthorizeEventFilter]
         // GET: Events/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -115,6 +118,7 @@ namespace OffRoad.Controllers
             return View(evenement);
         }
 
+        [AuthorizeEventFilter]
         // GET: Events/Delete/5
         public ActionResult Delete(int? id)
         {
