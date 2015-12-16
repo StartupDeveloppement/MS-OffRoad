@@ -17,8 +17,10 @@ namespace OffRoad.Provider
 
         public Roles GetRoleForUser(User user) 
         {
-            var requeteRoleForUser = from b in db.UserRole where b.IdUser.Equals(user.Id) select b;
-            return requeteRoleForUser.First().Roles; 
+            var requeteRoleForUser = from b in db.UserRole 
+                                     where b.IdUser.Id.Equals(user.Id) 
+                                     select b.Roles;
+            return requeteRoleForUser.First(); 
         }
     }
 }

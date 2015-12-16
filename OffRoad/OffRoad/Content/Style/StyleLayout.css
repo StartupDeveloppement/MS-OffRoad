@@ -24,6 +24,7 @@ footer{
     bottom:0px;
     background-color:#222222;
     color:white;
+    position: absolute;
 }
 
 footer label{
