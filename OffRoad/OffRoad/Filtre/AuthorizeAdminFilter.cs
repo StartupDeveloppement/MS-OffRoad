@@ -9,7 +9,7 @@ using OffRoad.Provider;
 
 namespace OffRoad.Filtre
 {
-    public class AuthorizeEventFilterAttribute : AuthorizeAttribute
+    public class AuthorizeAdminFilter : AuthorizeAttribute
     {
         private DBContext db = new DBContext();
         private RoleProvider roleProvider = new RoleProvider();
@@ -17,10 +17,19 @@ namespace OffRoad.Filtre
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
             User user = GetCurrentUser();
-            int role = roleProvider.GetRoleForUser(user).Id;
-            if (role != 1)
+            if (user == null)
             {
                 filterContext.Result = new ViewResult { ViewName = "~/Views/Shared/Error.cshtml" };
+            }
+            else
+            {
+
+
+                int role = roleProvider.GetRoleForUser(user).Id;
+                if (role != 1)
+                {
+                    filterContext.Result = new ViewResult { ViewName = "~/Views/Shared/Error.cshtml" };
+                }
             }
             base.OnAuthorization(filterContext);
         }

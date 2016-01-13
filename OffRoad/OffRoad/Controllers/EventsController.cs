@@ -41,7 +41,7 @@ namespace OffRoad.Controllers
             return View(evenement);
         }
 
-        [AuthorizeEventFilter]
+        [AuthorizeAdminFilter]
         // GET: Events/Create
         public ActionResult Create()
         {
@@ -73,7 +73,7 @@ namespace OffRoad.Controllers
             return View(evenement);
         }
 
-        [AuthorizeEventFilter]
+        [AuthorizeAdminFilter]
         // GET: Events/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -118,7 +118,7 @@ namespace OffRoad.Controllers
             return View(evenement);
         }
 
-        [AuthorizeEventFilter]
+        [AuthorizeAdminFilter]
         // GET: Events/Delete/5
         public ActionResult Delete(int? id)
         {

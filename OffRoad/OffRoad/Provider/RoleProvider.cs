@@ -22,5 +22,23 @@ namespace OffRoad.Provider
                                      select b.Roles;
             return requeteRoleForUser.First(); 
         }
+        public int GetRoleForUserNickName(string nickName)
+        {
+            var requeteUser = from b in db.Users
+                              where b.NickName.Equals(nickName)
+                              select b;
+            var requeteRoleForUser = from b in db.UserRole
+                                     where b.IdUser.Id.Equals(requeteUser.First().Id)
+                                     select b.Roles.Id;
+            return requeteRoleForUser.First();
+        }
+
+        public Roles GetRoleForUserId(int userId)
+        {
+            var requeteRoleForUser = from b in db.UserRole
+                                     where b.IdUser.Id.Equals(userId)
+                                     select b.Roles;
+            return requeteRoleForUser.First();
+        }
     }
 }
