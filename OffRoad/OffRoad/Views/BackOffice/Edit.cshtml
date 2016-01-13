@@ -1,0 +1,60 @@
+﻿@model OffRoad.Models.User
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+}
+
+<h2>Edit</h2>
+
+<form action="/BackOffice/SaveRole" enctype="multipart/form-data" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <table class="table">
+        <tr>
+            <td>
+                Pseudo
+            </td>
+            <td>
+                @Model.NickName
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Prénom
+            </td>
+            <td>
+               @Model.FirstName
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Nom
+            </td>
+            <td>
+                @Model.LastName
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Role
+            </td>
+            <td>
+                <select class="form-control" name="Role">
+                    @foreach (var role in ViewBag.Roles)
+                    {
+                        if (role.Id == ViewBag.UserRole)
+                        {
+                            <option value="@role.Id" selected="selected">@role.Label</option>
+                        }
+                        else
+                        {
+                            <option value="@role.Id">@role.Label</option>
+                        }
+                    }
+                </select>
+            </td>
+        </tr> 
+    </table>
+    <a id="button-color" class="btn btn-default" href="/BackOffice/Index">Précédent</a>
+    <input type="submit" value="Modifier" class="btn btn-default" />
+</form>

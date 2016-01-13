@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -127,22 +128,15 @@
     <Compile Include="Context\DBContext.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\BackOfficeController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Filtre\AuthorizeEventFilter.cs" />
+    <Compile Include="Filtre\AuthorizeAdminFilter.cs" />
     <Compile Include="Filtre\AuthorizeRedacFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hash\PasswordHash.cs" />
-    <Compile Include="Migrations\201512021507199_new event article.cs" />
-    <Compile Include="Migrations\201512021507199_new event article.Designer.cs">
-      <DependentUpon>201512021507199_new event article.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201512211401311_21122015.cs" />
-    <Compile Include="Migrations\201512211401311_21122015.Designer.cs">
-      <DependentUpon>201512211401311_21122015.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Avatar.cs" />
     <Compile Include="Models\Category.cs" />
@@ -201,7 +195,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Auth\LogIn.cshtml" />
@@ -216,9 +209,16 @@
     <Content Include="Views\Articles\Details.cshtml" />
     <Content Include="Views\Articles\Edit.cshtml" />
     <Content Include="Views\Articles\Index.cshtml" />
+    <Content Include="Views\BackOffice\Index.cshtml" />
+    <Content Include="Views\BackOffice\Edit.cshtml" />
+    <Content Include="Views\BackOffice\Desactive.cshtml" />
+    <Content Include="Views\BackOffice\MonCompte.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\BackOffice\EditOwnAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -226,14 +226,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201512021507199_new event article.resx">
-      <DependentUpon>201512021507199_new event article.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201512211401311_21122015.resx">
-      <DependentUpon>201512211401311_21122015.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

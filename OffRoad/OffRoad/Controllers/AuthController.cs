@@ -145,6 +145,18 @@ namespace OffRoad.Controllers
 
             User utilisateur = new User { FirstName = firstName, LastName = lastName, Email = email, Password = pwHash, NickName = nickname };
             utilisateur.Birthday = DateTime.Now;
+            utilisateur.Active = true;
+            var userRoleRequete = from b in db.UserRole
+                           where b.IdUser.Id.Equals(utilisateur.Id)
+                           select b;
+            UserRole userRoleVerify = userRoleRequete.FirstOrDefault();
+            if (userRoleVerify == null)
+            {
+                UserRole userRole = new UserRole();
+                userRole.IdUser = utilisateur;
+                userRole.Roles = db.Roles.Find(3);
+                db.UserRole.Add(userRole);
+            }
             db.Users.Add(utilisateur);
             db.SaveChanges();
             return utilisateur;
@@ -192,13 +204,14 @@ namespace OffRoad.Controllers
         {
             User user = db.Users.FirstOrDefault(u => u.NickName == nickname);
 
-            if (PasswordHash.ValidatePassword(password, user.Password))
+            if (!user.Active || user == null)
             {
-                return user;
+                return null;
             }
             else
             {
-                return null;
+                PasswordHash.ValidatePassword(password, user.Password);
+                return user;
             }
 
         }

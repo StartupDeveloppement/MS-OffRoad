@@ -1,0 +1,54 @@
+﻿@model OffRoad.Models.User
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Edit</h2>
+
+<form action="/BackOffice/EditOwnAccount" enctype="multipart/form-data" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="id" value="@Model.Id" />
+    <table class="table">
+        <tr>
+            <td>
+                Pseudo
+            </td>
+            <td>
+                @Model.NickName
+                @Html.ValidationMessageFor(model => model.NickName, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Prénom
+            </td>
+            <td>
+                @Html.EditorFor(m => m.FirstName)
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Nom
+            </td>
+            <td>
+                @Html.EditorFor(m => m.LastName)
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Email
+            </td>
+            <td>
+                @Html.EditorFor(m => m.Email)
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+       
+    </table>
+    <a id="button-color" class="btn btn-default" href="/BackOffice/Index">Précédent</a>
+    <input type="submit" value="Modifier" class="btn btn-default" />
+</form>

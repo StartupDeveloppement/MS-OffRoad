@@ -1,4 +1,7 @@
-﻿@{var currentUser = HttpContext.Current.User.Identity.Name;}
+﻿@{
+    var currentUser = HttpContext.Current.User.Identity.Name;
+
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,12 +57,24 @@
                     </li>
                     @if (currentUser != "")
                     {
-                        <li>
-                            <a href='@Url.Action("LogOut", "Auth")'>
-                                <img src='@Url.Content("~/Content/Image/Pointeur.png")' class="icon" />
-                                DECONNEXION
-                            </a>
-                        </li>
+                    <li>
+                        <a href='@Url.Action("Index", "BackOffice")'>
+                            <img src='@Url.Content("~/Content/Image/users.png")' class="icon" />
+                            UTILISATEURS
+                        </a>
+                    </li>
+                    <li>
+                        <a href='@Url.Action("MonCompte", "BackOffice")'>
+                            <img src='@Url.Content("~/Content/Image/users.png")' class="icon" />
+                            MON COMPTE
+                        </a>
+                    </li>
+                    <li>
+                        <a href='@Url.Action("LogOut", "Auth")'>
+                            <img src='@Url.Content("~/Content/Image/Pointeur.png")' class="icon" />
+                            DECONNEXION
+                        </a>
+                    </li>
                     }
                     else
                     {

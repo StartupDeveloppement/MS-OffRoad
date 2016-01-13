@@ -41,5 +41,7 @@ namespace OffRoad.Models
         public int Gender { get; set; }
 
         public Avatar Avatar { get; set; }
+
+        public bool Active { get; set; }
     }
 }
