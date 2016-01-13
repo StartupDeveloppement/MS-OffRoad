@@ -139,6 +139,10 @@
     <Compile Include="Migrations\201512021507199_new event article.Designer.cs">
       <DependentUpon>201512021507199_new event article.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512211401311_21122015.cs" />
+    <Compile Include="Migrations\201512211401311_21122015.Designer.cs">
+      <DependentUpon>201512211401311_21122015.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Avatar.cs" />
     <Compile Include="Models\Category.cs" />
@@ -158,6 +162,7 @@
     <Content Include="Content\Image\Coeur.png" />
     <Content Include="Content\Image\Pointeur.png" />
     <Content Include="Content\Image\Polaroid.png" />
+    <Content Include="Content\Style\bootstrap-datetimepicker.min.css" />
     <Content Include="Content\Style\bootstrap.css" />
     <Content Include="Content\Style\bootstrap.min.css" />
     <Content Include="Content\Image\Logo.png" />
@@ -168,6 +173,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Style\Site.css" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -181,6 +187,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\Moment.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -223,6 +230,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201512021507199_new event article.resx">
       <DependentUpon>201512021507199_new event article.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512211401311_21122015.resx">
+      <DependentUpon>201512211401311_21122015.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

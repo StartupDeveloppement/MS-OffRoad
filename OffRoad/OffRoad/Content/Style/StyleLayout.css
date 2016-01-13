@@ -1,4 +1,8 @@
-﻿#logo{
+﻿#page{
+    min-height:calc(100vh - 60px);
+}
+
+#logo{
     position: fixed;
     width : 113px;
     height: 90px;
@@ -19,12 +23,8 @@ a:hover{
 }
 
 footer{
-    min-height:100px;
-    width:100%;
-    bottom:0px;
     background-color:#222222;
     color:white;
-    
 }
 
 footer label{

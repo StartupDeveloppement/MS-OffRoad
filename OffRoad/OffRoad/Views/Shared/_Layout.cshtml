@@ -9,9 +9,15 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/datepicker")
+    @Scripts.Render("~/bundles/datepicker")
+    @Scripts.Render("~/bundles/jqueryUI")
+
+    
 
 </head>
 <body>
+    <div id="page">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -72,6 +78,7 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
+    </div>
     </div>
     <footer>
         <div class="container">

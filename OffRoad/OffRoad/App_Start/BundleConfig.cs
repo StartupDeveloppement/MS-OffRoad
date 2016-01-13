@@ -12,10 +12,10 @@ namespace OffRoad
                         "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryUI").Include(
-                            "~/Scripts/jquery-ui.js"));
+                            "~/Scripts/bootstrap-datetimepicker.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
-                        "~/Scripts/jquery-ui-timepicker-addon.js"));
+                       "~/Scripts/Moment.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -38,7 +38,7 @@ namespace OffRoad
                     "~/Content/Style/jquery-ui.css"));
 
             bundles.Add(new StyleBundle("~/Content/datepicker").Include(
-                    "~/Content/Style/jquery-ui-timepicker-addon.css"));
+                    "~/Content/Style/bootstrap-datetimepicker.min.css"));
 
             // Définissez EnableOptimizations sur False pour le débogage. Pour plus d'informations,
             // visitez http://go.microsoft.com/fwlink/?LinkId=301862
