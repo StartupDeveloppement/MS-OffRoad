@@ -137,11 +137,17 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hash\PasswordHash.cs" />
+    <Compile Include="Methodes\ArticleMethode.cs" />
     <Compile Include="Methodes\AuthMethode.cs" />
     <Compile Include="Methodes\BackOfficeMethode.cs" />
+    <Compile Include="Methodes\EventMethode.cs" />
     <Compile Include="Migrations\201601131102271_mig2.cs" />
     <Compile Include="Migrations\201601131102271_mig2.Designer.cs">
       <DependentUpon>201601131102271_mig2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601131519244_mig.cs" />
+    <Compile Include="Migrations\201601131519244_mig.Designer.cs">
+      <DependentUpon>201601131519244_mig.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Avatar.cs" />
@@ -230,6 +236,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201601131519244_mig.resx">
+      <DependentUpon>201601131519244_mig.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

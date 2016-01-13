@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using OffRoad.Context;
 using OffRoad.Models;
 using OffRoad.Filtre;
+using OffRoad.Methodes;
 
 namespace OffRoad.Controllers
 {
@@ -17,8 +18,9 @@ namespace OffRoad.Controllers
     {
         private DBContext db = new DBContext();
         private static DateTime? createDateSave = DateTime.MinValue;
+        private AuthMethode authM = new AuthMethode();
+        private ArticleMethode artM = new ArticleMethode();
 
-        #region Action
         [AllowAnonymous]
         // GET: Articles
         public ActionResult Index()
@@ -39,7 +41,7 @@ namespace OffRoad.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Comments = GetCommentairesForArticle(article.Id);
+            ViewBag.Comments = artM.GetCommentairesForArticle(article.Id);
             return View(article);
         }
 
@@ -152,7 +154,7 @@ namespace OffRoad.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateComment([Bind(Include = "Id,Text,Utilisateur,Date")] ArticleComment commentaires, int idArticle)
         {
-            User user = GetCurrentUser();
+            User user = authM.GetCurrentUser(HttpContext.User.Identity.Name);
             if (user == null)
             {
                 return HttpNotFound();
@@ -160,7 +162,7 @@ namespace OffRoad.Controllers
             commentaires.User = user;
             commentaires.CreateDate = DateTime.Now;
             if (idArticle != 0)
-                commentaires.Article = GetArticleById(idArticle);
+                commentaires.Article = db.Articles.Find(idArticle);
             else
             {                                        
                 return RedirectToAction("Error","Shared");
@@ -188,22 +190,9 @@ namespace OffRoad.Controllers
             return userRequete.FirstOrDefault();
         }
 
-        public Article GetArticleById(int idArticle)
-        {
-            var requeteArticle = from b in db.Articles
-                               where b.Id.Equals(idArticle)
-                               select b;
 
-            return requeteArticle.FirstOrDefault();
-        }
 
-        public List<ArticleComment> GetCommentairesForArticle(int idArticle)
-        {
-            var requeteCommentaires = from b in db.ArticleComments
-                                      where b.Article.Id == idArticle
-                                      select b;
-            return requeteCommentaires.ToList<ArticleComment>();
-        }
+
 
     }
 }

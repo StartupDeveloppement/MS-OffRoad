@@ -36,14 +36,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.BeginDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input class="form-control" data-val="true" data-val-required="Ce champ est obligatoire" id="BeginDate" name="BeginDate" value="">
+                <input class="form-control" data-val="true" data-val-required="Ce champ est obligatoire" id="BeginDate" name="BeginDate" value="@Model.BeginDate">
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input class="form-control" data-val="true" data-val-required="Ce champ est obligatoire" id="EndDate" name="EndDate" value="">
+                <input class="form-control" data-val="true" data-val-required="Ce champ est obligatoire" id="EndDate" name="EndDate" value="@Model.EndDate">
             </div>
         </div>
 
@@ -61,7 +61,7 @@
             </div>
         </div>
 
-        @Html.Hidden("CreateDate", DateTime.Now)>
+        @Html.Hidden("CreateDate", DateTime.Now)
     </div>
 }
 

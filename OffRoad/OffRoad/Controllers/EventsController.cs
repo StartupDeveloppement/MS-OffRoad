@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using OffRoad.Context;
 using OffRoad.Models;
 using OffRoad.Filtre;
+using OffRoad.Methodes;
 
 namespace OffRoad.Controllers
 {
@@ -17,6 +18,8 @@ namespace OffRoad.Controllers
     {
         private DBContext db = new DBContext();
         private static DateTime? createDateSave = DateTime.MinValue;
+        private EventMethode eventM = new EventMethode();
+        private AuthMethode authM = new AuthMethode();
 
         [AllowAnonymous]
         // GET: Events
@@ -38,7 +41,7 @@ namespace OffRoad.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Comments = GetCommentairesForEvent(evenement.Id);
+            ViewBag.Comments = eventM.GetCommentairesForEvent(evenement.Id);
             return View(evenement);
         }
 
@@ -140,15 +143,16 @@ namespace OffRoad.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateComment([Bind(Include = "Id,Text,Utilisateur,Date")] EventComment commentaires, int idEvent)
         {
-            User user = GetCurrentUser();
+            User user = authM.GetCurrentUser(HttpContext.User.Identity.Name);
             if (user == null)
             {
+              
                 return HttpNotFound();
             }
             commentaires.User = user;
             commentaires.CreateDate = DateTime.Now;
             if (idEvent != 0)
-                commentaires.Event = GetEventById(idEvent);
+                commentaires.Event = db.Events.Find(idEvent);
             else
             {
                 return RedirectToAction("Error", "Shared");
@@ -176,32 +180,6 @@ namespace OffRoad.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        public User GetCurrentUser()
-        {
-            var nickName = HttpContext.User.Identity.Name;
-            var userRequete = from b in db.Users
-                              where b.NickName.Equals(nickName)
-                              select b;
-            return userRequete.FirstOrDefault();
-        }
-
-        public Event GetEventById(int idEvent)
-        {
-            var requeteEvent = from b in db.Events
-                               where b.Id.Equals(idEvent)
-                               select b;
-
-            return requeteEvent.FirstOrDefault();
-        }
-
-        public List<EventComment> GetCommentairesForEvent(int idEvent)
-        {
-            var requeteCommentaires = from b in db.EventComment
-                                      where b.Event.Id == idEvent
-                                      select b;
-            return requeteCommentaires.ToList<EventComment>();
         }
     }
 }
