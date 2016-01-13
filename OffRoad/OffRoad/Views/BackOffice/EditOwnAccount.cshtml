@@ -47,8 +47,53 @@
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </td>
         </tr>
+        <tr>
+            <td>
+                Birthday
+            </td>
+            <td>
+                <input type="text" id="birthday" name="Birthday" value="@Model.Birthday"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                City
+            </td>
+            <td>
+                <input type="text" id="city" name="City" value="@Model.City" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Gender
+            </td>
+            <td>
+                @if (Model.Gender == 0) 
+                { 
+                    @:<input type="radio" name="Gender" value="0" checked> Male<br>
+                    @:<input type="radio" name="Gender" value="1"> Female<br>
+                }
+                else
+                {
+                    @:<input type="radio" name="Gender" value="0" > Male<br>
+                    @:<input type="radio" name="Gender" value="1" checked> Female<br>
+                }
+            </td>
+        </tr>
        
     </table>
     <a id="button-color" class="btn btn-default" href="/BackOffice/Index">Précédent</a>
     <input type="submit" value="Modifier" class="btn btn-default" />
 </form>
+
+<script type="text/javascript">
+    $(function () {
+        $('#birthday').datetimepicker({
+            locale: 'fr',
+            format: 'DD/MM/YYYY',
+            viewMode: 'years'
+        });
+    });
+</script>
+
+

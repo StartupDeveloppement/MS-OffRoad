@@ -137,6 +137,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hash\PasswordHash.cs" />
+    <Compile Include="Methodes\AuthMethode.cs" />
+    <Compile Include="Methodes\BackOfficeMethode.cs" />
+    <Compile Include="Migrations\201601131102271_mig2.cs" />
+    <Compile Include="Migrations\201601131102271_mig2.Designer.cs">
+      <DependentUpon>201601131102271_mig2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Avatar.cs" />
     <Compile Include="Models\Category.cs" />
@@ -160,8 +166,6 @@
     <Content Include="Content\Style\bootstrap.css" />
     <Content Include="Content\Style\bootstrap.min.css" />
     <Content Include="Content\Image\Logo.png" />
-    <Content Include="Content\Style\jquery-ui-timepicker-addon.css" />
-    <Content Include="Content\Style\jquery-ui.css" />
     <Content Include="Content\Style\StyleLayout.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -218,7 +222,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -226,6 +229,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201601131102271_mig2.resx">
+      <DependentUpon>201601131102271_mig2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

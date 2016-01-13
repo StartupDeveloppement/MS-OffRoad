@@ -18,6 +18,7 @@ namespace OffRoad.Controllers
         private DBContext db = new DBContext();
         private static DateTime? createDateSave = DateTime.MinValue;
 
+        #region Action
         [AllowAnonymous]
         // GET: Articles
         public ActionResult Index()
@@ -144,6 +145,8 @@ namespace OffRoad.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        #endregion
 
         protected override void Dispose(bool disposing)
         {

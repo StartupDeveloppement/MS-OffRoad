@@ -1,6 +1,7 @@
 ﻿using OffRoad.Context;
 using OffRoad.Models;
 using OffRoad.Provider;
+using OffRoad.Methodes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace OffRoad.Controllers
     {
         private DBContext db = new DBContext();
         private OffRoad.Provider.RoleProvider roleProvider = new OffRoad.Provider.RoleProvider();
+        private AuthMethode AM = new AuthMethode();
 
         #region Actions
         // GET: Auth
@@ -43,7 +45,7 @@ namespace OffRoad.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = Authentifier(viewModel.NickName, viewModel.PassWord);
+                User user = AM.Authentifier(viewModel.NickName, viewModel.PassWord);
                 if (user != null)
                 {
                     FormsAuthentication.SetAuthCookie(user.NickName, false);
@@ -83,18 +85,17 @@ namespace OffRoad.Controllers
                 {
                     state = 1;
                     err += "- Les adresses mails ne sont pas égales, veuillez saisir des adresses mails identiques<br/>";
-
                 }
                 else
                 {
-                    if (!IsExistEmail(user.Email))
+                    if (!AM.IsExistEmail(user.Email))
                     {
                         state = 1;
                         err += "- L'adresse mail est déjà utilisée<br/>";
                     }
                 }
-
-                if (!IsExistNickname(user.NickName))
+                
+                if (!AM.IsExistNickname(user.NickName))
                 {
                     state = 1;
                     err += "- Le pseudo est déjà utilisé<br/>";
@@ -109,10 +110,8 @@ namespace OffRoad.Controllers
                 //**** Création d'un utilisateur et initialisation d'un role ****//
                 try
                 {
-                    User newuser = AjouterUtilisateur(user.LastName, user.FirstName, user.Password, user.Email, user.NickName);
+                    User newuser = AM.AjouterUtilisateur(user.LastName, user.FirstName, user.Password, user.Email, user.NickName);
                     UserRole userrole = new UserRole { IdUser = newuser, Roles = db.Roles.Find(1) };
-                    // db.UserRole.Add(userrole);
-                    //  db.SaveChanges();
                 }
                 catch (Exception ex)
                 {
@@ -123,99 +122,6 @@ namespace OffRoad.Controllers
 
             return RedirectToAction("LogIn");
         }
-
-        #endregion
-
-        #region Méthodes
-
-        /// <summary>
-        /// Création de l'utilisateur dans la table USER
-        /// </summary>
-        /// <param name="lastName"></param>
-        /// <param name="firstName"></param>
-        /// <param name="password"></param>
-        /// <param name="email"></param>
-        /// <param name="nickname"></param>
-        /// <returns>Utilisateur crée</returns>
-        public User AjouterUtilisateur(string lastName, string firstName, string password, string email, string nickname)
-        {
-            string pwHash;
-
-            pwHash = PasswordHash.CreateHash(password);
-
-            User utilisateur = new User { FirstName = firstName, LastName = lastName, Email = email, Password = pwHash, NickName = nickname };
-            utilisateur.Birthday = DateTime.Now;
-            utilisateur.Active = true;
-            var userRoleRequete = from b in db.UserRole
-                           where b.IdUser.Id.Equals(utilisateur.Id)
-                           select b;
-            UserRole userRoleVerify = userRoleRequete.FirstOrDefault();
-            if (userRoleVerify == null)
-            {
-                UserRole userRole = new UserRole();
-                userRole.IdUser = utilisateur;
-                userRole.Roles = db.Roles.Find(3);
-                db.UserRole.Add(userRole);
-            }
-            db.Users.Add(utilisateur);
-            db.SaveChanges();
-            return utilisateur;
-        }
-
-        /// <summary>
-        /// Verification de l'existance du Mail 
-        /// </summary>
-        /// <param name="email"></param>
-        /// <returns>Vrai si existant, sinon faux </returns>
-        public bool IsExistEmail(string email)
-        {
-
-            User userToTest = db.Users.FirstOrDefault(u => u.Email == email);
-            if (userToTest == null)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Verification de l'existance du Pseudo
-        /// </summary>
-        /// <param name="nickname"></param>
-        /// <returns>Vrai si existant, sinon faux</returns>
-        public bool IsExistNickname(string nickname)
-        {
-
-            User userToTest = db.Users.FirstOrDefault(u => u.NickName == nickname);
-            if (userToTest == null)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Test de login valide
-        /// </summary>
-        /// <param name="email"></param>
-        /// <param name="password"></param>
-        /// <returns>Retourne user si existe sinon null</returns>
-        public User Authentifier(string nickname, string password)
-        {
-            User user = db.Users.FirstOrDefault(u => u.NickName == nickname);
-
-            if (!user.Active || user == null)
-            {
-                return null;
-            }
-            else
-            {
-                PasswordHash.ValidatePassword(password, user.Password);
-                return user;
-            }
-
-        }
-
         #endregion
     }
 }

@@ -11,10 +11,10 @@ namespace OffRoad
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryUI").Include(
+            bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
                             "~/Scripts/bootstrap-datetimepicker.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
+            bundles.Add(new ScriptBundle("~/bundles/moment").Include(
                        "~/Scripts/Moment.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -33,9 +33,6 @@ namespace OffRoad
                       "~/Content/Style/bootstrap.css",
                       "~/Content/Style/StyleLayout.css",
                       "~/Content/Style/site.css"));
-
-            bundles.Add(new StyleBundle("~/Content/cssUI").Include(
-                    "~/Content/Style/jquery-ui.css"));
 
             bundles.Add(new StyleBundle("~/Content/datepicker").Include(
                     "~/Content/Style/bootstrap-datetimepicker.min.css"));

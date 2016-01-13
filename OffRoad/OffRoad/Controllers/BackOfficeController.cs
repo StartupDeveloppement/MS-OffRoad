@@ -2,6 +2,7 @@
 using OffRoad.Filtre;
 using OffRoad.Models;
 using OffRoad.Provider;
+using OffRoad.Methodes;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -15,25 +16,28 @@ namespace OffRoad.Controllers
         private DBContext db = new DBContext();
         private RoleProvider roleProvider = new RoleProvider();
 
+        BackOfficeMethode BOC = new BackOfficeMethode();
+        AuthMethode AM = new AuthMethode();
+
         // GET: BackOffice
         public ActionResult Index()
         {
-            User currentUser = GetCurrentUser();
+            User currentUser = AM.GetCurrentUser(HttpContext.User.Identity.Name);
             Roles roleUser = roleProvider.GetRoleForUser(currentUser);
             ViewBag.RoleId = roleUser.Id;
             return View(db.Users.ToList());
-
         }
 
+        //GET: BackOffice/MonCompte
         public ActionResult MonCompte()
         {
-            User currentUser = GetCurrentUser();
+            User currentUser = AM.GetCurrentUser(HttpContext.User.Identity.Name);
             ViewBag.CurrentUSer = currentUser;
             return View();
         }
 
         [AuthorizeAdminFilter]
-        // GET: Articles/Edit/5
+        // GET: BackOffice/Edit/5
         public ActionResult Edit(int id)
         {
             User user = db.Users.Find(id);
@@ -47,7 +51,7 @@ namespace OffRoad.Controllers
             return View(user);
         }
 
-        // POST: Articles/Edit/5
+        // POST: BackOffice/Edit/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -63,7 +67,7 @@ namespace OffRoad.Controllers
             return View(user);
         }
 
-        // GET: Articles/Edit/5
+        // GET: BackOffice/EditOwnAccount/5
         public ActionResult EditOwnAccount(int id)
         {
             User user = db.Users.Find(id);
@@ -74,12 +78,12 @@ namespace OffRoad.Controllers
             return View(user);
         }
 
-        // POST: Articles/Edit/5
+        // POST: BackOffice/EditOwnAccount/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditOwnAccount([Bind(Include = "Id,NickName,FirstName,LastName,Email")] User user)
+        public ActionResult EditOwnAccount([Bind(Include = "Id,NickName,FirstName,LastName,Email,Birthday,City,Gender")] User user)
         {
             User userToEdit = db.Users.Find(user.Id);
             if (userToEdit == null)
@@ -89,6 +93,10 @@ namespace OffRoad.Controllers
             userToEdit.FirstName = user.FirstName;
             userToEdit.Email = user.Email;
             userToEdit.LastName = user.LastName;
+            userToEdit.Birthday = user.Birthday;
+            userToEdit.City = user.City;
+            userToEdit.Gender = user.Gender;
+
             db.Entry(userToEdit).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("MonCompte");
@@ -115,19 +123,28 @@ namespace OffRoad.Controllers
         }
 
         [AuthorizeAdminFilter]
+        public ActionResult DesativeUser(int id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            else
+            {
+                return View(BOC.DeleteUser(id));
+            }
+        }
+        
+
         public ActionResult Desactive(int id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
-            int role = roleProvider.GetRoleForUser(user).Id;
-            var requete = from b in db.UserRole
-                          where b.IdUser.Id.Equals(user.Id)
-                          select b;
-            UserRole userRole = requete.FirstOrDefault();
-            return View(user);
+
+            System.Web.Security.FormsAuthentication.SignOut();
+            return Redirect("/Home/Index");
         }
 
         public ActionResult DesactiveAccountUser()
@@ -140,40 +157,18 @@ namespace OffRoad.Controllers
                               select b;
             UserRole role = requeteRole.FirstOrDefault();
             db.UserRole.Remove(role);
-            User userToModify = DesactiveUser(user);
+            User userToModify = BOC.DesactiveUser(user);
             db.Entry(userToModify).State = EntityState.Modified;
             db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
-        public User DesactiveUser(User user)
-        {
-            user.Active = false;
-            user.FirstName = "null";
-            user.LastName = "null";
-            user.Password = "null";
-            user.Birthday = DateTime.Now;
-            user.City = "null";
-            user.Email = "null";
-            user.Gender = 0;
-            user.Avatar = null;
-            return user;
-        }
-
-        public User GetCurrentUser()
-        {
-            var nickName = HttpContext.User.Identity.Name;
-            var userRequete = from b in db.Users
-                              where b.NickName.Equals(nickName)
-                              select b;
-            return userRequete.FirstOrDefault();
-        }
-        public User GetCurrentUserById(int idUser)
-        {
-            var userRequete = from b in db.Users
-                              where b.Id.Equals(idUser)
-                              select b;
-            return userRequete.FirstOrDefault();
+            User get_user = AM.GetCurrentUser(HttpContext.User.Identity.Name);
+            if (idUser == get_user.Id)
+            {
+                System.Web.Security.FormsAuthentication.SignOut();
+                return Redirect("/Home/Index");
+            }
+            else
+                return RedirectToAction("Index");
         }
     }
 }
