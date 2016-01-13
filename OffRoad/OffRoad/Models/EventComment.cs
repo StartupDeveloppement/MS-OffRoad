@@ -6,7 +6,7 @@ using System.Web;
 
 namespace OffRoad.Models
 {
-    public class ArticleComment
+    public class EventComment
     {
         [Key]
         public int Id { get; set; }
@@ -21,7 +21,7 @@ namespace OffRoad.Models
         public virtual User User { get; set; }
 
         [Required]
-        public virtual Article Article { get; set; }
+        public virtual Event Event { get; set; }
 
 
     }

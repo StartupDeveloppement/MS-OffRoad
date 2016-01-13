@@ -38,6 +38,7 @@ namespace OffRoad.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Comments = GetCommentairesForArticle(article.Id);
             return View(article);
         }
 
@@ -145,6 +146,29 @@ namespace OffRoad.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        [ValidateInput(false)]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateComment([Bind(Include = "Id,Text,Utilisateur,Date")] ArticleComment commentaires, int idArticle)
+        {
+            User user = GetCurrentUser();
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            commentaires.User = user;
+            commentaires.CreateDate = DateTime.Now;
+            if (idArticle != 0)
+                commentaires.Article = GetArticleById(idArticle);
+            else
+            {                                        
+                return RedirectToAction("Error","Shared");
+            }
+            db.ArticleComments.Add(commentaires);
+            db.SaveChanges();            
+            return RedirectToAction("Details", new { id = idArticle});
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -153,5 +177,32 @@ namespace OffRoad.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public User GetCurrentUser()
+        {
+            var nickName = HttpContext.User.Identity.Name;
+            var userRequete = from b in db.Users
+                              where b.NickName.Equals(nickName)
+                              select b;
+            return userRequete.FirstOrDefault();
+        }
+
+        public Article GetArticleById(int idArticle)
+        {
+            var requeteArticle = from b in db.Articles
+                               where b.Id.Equals(idArticle)
+                               select b;
+
+            return requeteArticle.FirstOrDefault();
+        }
+
+        public List<ArticleComment> GetCommentairesForArticle(int idArticle)
+        {
+            var requeteCommentaires = from b in db.ArticleComments
+                                      where b.Article.Id == idArticle
+                                      select b;
+            return requeteCommentaires.ToList<ArticleComment>();
+        }
+
     }
 }

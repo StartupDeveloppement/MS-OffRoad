@@ -137,11 +137,20 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hash\PasswordHash.cs" />
+    <Compile Include="Migrations\201601131434054_maj articlecomment.cs" />
+    <Compile Include="Migrations\201601131434054_maj articlecomment.Designer.cs">
+      <DependentUpon>201601131434054_maj articlecomment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201601131450596_maj eventcomment.cs" />
+    <Compile Include="Migrations\201601131450596_maj eventcomment.Designer.cs">
+      <DependentUpon>201601131450596_maj eventcomment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Avatar.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\ArticleComment.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\EventComment.cs" />
     <Compile Include="Models\EventUser.cs" />
     <Compile Include="Models\LogIn.cs" />
     <Compile Include="Models\Register.cs" />
@@ -218,7 +227,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -226,6 +234,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201601131434054_maj articlecomment.resx">
+      <DependentUpon>201601131434054_maj articlecomment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201601131450596_maj eventcomment.resx">
+      <DependentUpon>201601131450596_maj eventcomment.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

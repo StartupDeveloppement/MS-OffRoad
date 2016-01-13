@@ -38,6 +38,7 @@ namespace OffRoad.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Comments = GetCommentairesForEvent(evenement.Id);
             return View(evenement);
         }
 
@@ -134,6 +135,29 @@ namespace OffRoad.Controllers
             return View(evenement);
         }
 
+        [HttpPost]
+        [ValidateInput(false)]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateComment([Bind(Include = "Id,Text,Utilisateur,Date")] EventComment commentaires, int idEvent)
+        {
+            User user = GetCurrentUser();
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            commentaires.User = user;
+            commentaires.CreateDate = DateTime.Now;
+            if (idEvent != 0)
+                commentaires.Event = GetEventById(idEvent);
+            else
+            {
+                return RedirectToAction("Error", "Shared");
+            }
+            db.EventComment.Add(commentaires);
+            db.SaveChanges();
+            return RedirectToAction("Details", new { id = idEvent });
+        }
+
         // POST: Events/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -152,6 +176,32 @@ namespace OffRoad.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public User GetCurrentUser()
+        {
+            var nickName = HttpContext.User.Identity.Name;
+            var userRequete = from b in db.Users
+                              where b.NickName.Equals(nickName)
+                              select b;
+            return userRequete.FirstOrDefault();
+        }
+
+        public Event GetEventById(int idEvent)
+        {
+            var requeteEvent = from b in db.Events
+                               where b.Id.Equals(idEvent)
+                               select b;
+
+            return requeteEvent.FirstOrDefault();
+        }
+
+        public List<EventComment> GetCommentairesForEvent(int idEvent)
+        {
+            var requeteCommentaires = from b in db.EventComment
+                                      where b.Event.Id == idEvent
+                                      select b;
+            return requeteCommentaires.ToList<EventComment>();
         }
     }
 }
