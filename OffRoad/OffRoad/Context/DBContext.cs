@@ -25,6 +25,7 @@ namespace OffRoad.Context
         public DbSet<Category> Categorys { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<EventUser> EventUsers { get; set; }
+        public DbSet<EventComment> EventComment { get; set; }
 
     }
 }

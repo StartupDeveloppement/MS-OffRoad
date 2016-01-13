@@ -148,6 +148,7 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\ArticleComment.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\EventComment.cs" />
     <Compile Include="Models\EventUser.cs" />
     <Compile Include="Models\LogIn.cs" />
     <Compile Include="Models\Register.cs" />
@@ -229,11 +230,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201601131102271_mig2.resx">
-      <DependentUpon>201601131102271_mig2.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

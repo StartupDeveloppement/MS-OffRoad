@@ -72,3 +72,59 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+@if (ViewBag.Comments != null)
+{
+    foreach (var comment in ViewBag.Comments)
+    {
+        <div class='col-md-8'>
+            <div class='row com'>
+                <div class="col-md-3">
+                    <div>
+                        @{
+                            OffRoad.Models.EventComment com = new OffRoad.Models.EventComment();
+                            OffRoad.Context.DBContext db = new OffRoad.Context.DBContext();
+                            com = comment;
+                            var requeteUser = from b in db.Users
+                                              where b.Id.Equals(com.User.Id)
+                                              select b;
+                            var infoUserComment = requeteUser.FirstOrDefault();
+
+                        }
+                        @if (@infoUserComment == null)
+                    {
+                            <p>Publié par un utilisateur n'ayant plus de compte</p>
+                        }
+                        else
+                        {
+                            <p>@infoUserComment.NickName</p>
+                        }
+
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div>@comment.CreateDate.ToString("dd/MM/yyyy HH:mm")</div>
+                    <div>@Html.Raw(System.Web.HttpUtility.HtmlDecode(comment.Text))</div>
+                </div>
+            </div>
+        </div>}
+                            }
+
+<h3>Commentaire</h3>
+@using (Html.BeginForm("CreateComment", "Events", new { idEvent = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="col-md-8">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <textarea name="Text" rows="6" class="form-control"> </textarea>
+            </div>
+
+            <div class="form-group">
+                <a href="/Events/Index" class="btn btn-default">Précédent</a>
+                <input type="submit" value="Créer" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
