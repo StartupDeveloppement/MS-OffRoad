@@ -95,7 +95,7 @@ namespace OffRoad.Methodes
             else
             {
                 if (PasswordHash.ValidatePassword(password, user.Password))
-                    return user;
+                return user;
                 else
                     return null;
             }
