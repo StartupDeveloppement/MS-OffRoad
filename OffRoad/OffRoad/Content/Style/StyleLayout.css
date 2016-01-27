@@ -8,6 +8,12 @@
     height: 90px;
 }
 
+.marge-info{
+    margin-bottom : 40px;
+}
+.textarea{
+    min-width: 100%;
+}
 .icon{
     width:20px;
     height:20px;

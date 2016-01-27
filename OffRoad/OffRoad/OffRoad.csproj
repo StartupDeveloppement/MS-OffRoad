@@ -40,6 +40,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -107,12 +115,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -148,6 +150,7 @@
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\EventComment.cs" />
     <Compile Include="Models\EventUser.cs" />
+    <Compile Include="Models\Email.cs" />
     <Compile Include="Models\LogIn.cs" />
     <Compile Include="Models\Register.cs" />
     <Compile Include="Models\Roles.cs" />
@@ -161,6 +164,7 @@
     <Content Include="Content\Image\Coeur.png" />
     <Content Include="Content\Image\header_connexion.png" />
     <Content Include="Content\Image\header_inscription.png" />
+    <Content Include="Content\Image\header_contact.png" />
     <Content Include="Content\Image\Pointeur.png" />
     <Content Include="Content\Image\Polaroid.png" />
     <Content Include="Content\Style\bootstrap-datetimepicker.min.css" />
@@ -569,6 +573,7 @@
     <Content Include="Views\BackOffice\MonCompte.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\BackOffice\EditOwnAccount.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
