@@ -52,8 +52,8 @@ namespace OffRoad.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
-                ModelState.AddModelError("LoginError", "Mail et/ou mot de passe incorrect(s)");
-                return RedirectToAction("LogIn");
+                ModelState.AddModelError("LoginError", "Pseudo et/ou mot de passe incorrect(s)");
+                return View("LogIn");
             }
 
             return View();

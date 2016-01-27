@@ -88,14 +88,16 @@ namespace OffRoad.Methodes
         {
             User user = db.Users.FirstOrDefault(u => u.NickName == nickname);
 
-            if (!user.Active || user == null)
+            if (user == null || !user.Active)
             {
                 return null;
             }
             else
             {
-                PasswordHash.ValidatePassword(password, user.Password);
-                return user;
+                if (PasswordHash.ValidatePassword(password, user.Password))
+                    return user;
+                else
+                    return null;
             }
         }
 

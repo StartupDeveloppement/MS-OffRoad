@@ -32,3 +32,25 @@ footer label{
     font-size:26px;
     font-family:Arial;
 }
+
+.banner{
+    background-color:black;
+}
+
+.banner div img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#btn_connexion{
+    width:120%;
+}
+
+.inscription{
+    text-align:center;
+}
+
+.danger{
+    color:red;
+}

@@ -3,51 +3,51 @@
 @{
     ViewBag.Title = "LogIn";
 }
-
-<h2>LogIn</h2>
-
-
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>LogIn</h4>
-        @Html.ValidationMessage("LoginError")
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="col-md-6">
-            <div class="form-group">
-                @Html.LabelFor(model => model.NickName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.NickName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.NickName, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.PassWord, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PassWord, new { htmlAttributes = new { @class = "form-control" ,@type ="password"} })
-                    @Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Connexion" class="btn btn-default" />
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div>Pas encore inscrit ?</div>
-            @Html.ActionLink("Inscription", "Register", null, new { @class="btn btn-success" })
-        </div>
-
-        <div class="form-group">
+<div class="container-fluid">
+    <div class="row banner">
+        <div class="col-md-12">
+            <img src="~/Content/Image/header_connexion.png" />
         </div>
     </div>
-}
+</div>
+
+<div class="container body-content">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="connexion col-md-4 col-lg-offset-1">
+                <h4>Connectez-vous à votre espace!</h4>
+                @Html.ValidationMessage("LoginError","", new { @class = "danger"  })
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
+                        @Html.EditorFor(model => model.NickName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Pseudo" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.NickName, "", new { @class = "text-danger" })
+                    <br />
+                    <div class="input-group">
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></div>
+                        @Html.EditorFor(model => model.PassWord, new { htmlAttributes = new { @class = "form-control", @type = "password", @placeholder = "Mot de passe" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })
+                </div>
+                <input type="submit" class="btn btn-success" value="Se connecter" id="btn_connexion" />
+                <br />
+                <a href="#">Mot de passe oublié?</a>
+            </div>
+            <div class="inscription col-md-4 col-lg-offset-1">
+                <h3>Vous étes un nouvelle utilisateur?</h3>
+                <h4>Créez votre compte!</h4>
+                <p>Je ne suis pas encore membre et je souhaite rejoinde la Offroad Bike Team</p>
+                @Html.ActionLink("Créer un compte", "Register", null, new { @class = "btn btn-info" })
+            </div>
+        </div>
+        
+    }
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
