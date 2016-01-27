@@ -160,6 +160,7 @@
     <Content Include="Content\Image\Article.png" />
     <Content Include="Content\Image\Coeur.png" />
     <Content Include="Content\Image\header_connexion.png" />
+    <Content Include="Content\Image\header_inscription.png" />
     <Content Include="Content\Image\Pointeur.png" />
     <Content Include="Content\Image\Polaroid.png" />
     <Content Include="Content\Style\bootstrap-datetimepicker.min.css" />

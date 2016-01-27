@@ -37,7 +37,7 @@ footer label{
     background-color:black;
 }
 
-.banner div img{
+.banner div img,#btn_inscrit{
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -51,6 +51,22 @@ footer label{
     text-align:center;
 }
 
-.danger{
+.inscription_form div input{
+    margin-bottom:10px;
+}
+
+.italique {
+    font-style:italic;
+}
+
+#inscription_info{
+    margin-bottom:20px;
+}
+
+#inscription_erreur,.danger{
     color:red;
+}
+
+#btn_inscrit{
+    width:100%;
 }
