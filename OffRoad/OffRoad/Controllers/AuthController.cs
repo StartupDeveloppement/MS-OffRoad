@@ -130,7 +130,7 @@ namespace OffRoad.Controllers
         }
 
         [HttpPost]
-        public ActionResult Password(string mail)
+        public ActionResult _Password(string mail)
         {
             AuthMethode AM = new AuthMethode();
             MailMethode MM = new MailMethode();
@@ -153,7 +153,12 @@ namespace OffRoad.Controllers
                 ViewBag.Message = "Mail non valide";
             }
 
+            return PartialView();
+        }
 
+        [HttpGet]
+        public ActionResult _Password()
+        {
             return View();
         }
         #endregion
