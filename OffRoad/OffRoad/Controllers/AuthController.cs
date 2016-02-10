@@ -88,13 +88,13 @@ namespace OffRoad.Controllers
                 }
                 else
                 {
-                    if (!AM.IsExistEmail(user.Email))
+                    if (AM.IsExistEmail(user.Email))
                     {
                         state = 1;
                         err += "- L'adresse mail est déjà utilisée<br/>";
                     }
                 }
-                
+
                 if (!AM.IsExistNickname(user.NickName))
                 {
                     state = 1;
@@ -121,6 +121,40 @@ namespace OffRoad.Controllers
             }
 
             return RedirectToAction("LogIn");
+        }
+
+        [HttpGet]
+        public ActionResult Password()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Password(string mail)
+        {
+            AuthMethode AM = new AuthMethode();
+            MailMethode MM = new MailMethode();
+
+            if (AM.IsExistEmail(mail))
+            {
+                string password = AM.GeneratePassword(8);
+                string pwHash = PasswordHash.CreateHash(password);
+
+                User user = AM.GetUserByMail(mail);
+
+                AM.UpdatePassword(user, pwHash);
+                string body = password;
+                MM.SendMail(mail, "[OffRoad] Nouveau mot de passe", body);
+
+                ViewBag.Message = "Nouveau mot de passe envoyer par mail!";
+            }
+            else
+            {
+                ViewBag.Message = "Mail non valide";
+            }
+
+
+            return View();
         }
         #endregion
     }

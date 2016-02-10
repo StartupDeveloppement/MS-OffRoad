@@ -2,7 +2,10 @@
 using OffRoad.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Security;
 
@@ -23,9 +26,9 @@ namespace OffRoad.Methodes
             User userToTest = db.Users.FirstOrDefault(u => u.Email == email);
             if (userToTest == null)
             {
-                return true;
+                return false;
             }
-            return false;
+            return true;
         }
 
         /// <summary>
@@ -116,6 +119,41 @@ namespace OffRoad.Methodes
                               where b.Id.Equals(idUser)
                               select b;
             return userRequete.FirstOrDefault();
+        }
+
+        public User GetUserByMail(string mail)
+        {
+            var userRequete = from b in db.Users
+                              where b.Email.Equals(mail)
+                              select b;
+            return userRequete.FirstOrDefault();
+        }
+
+        public string GeneratePassword(int maxSize)
+        {
+            char[] chars = new char[62];
+            chars =
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
+            byte[] data = new byte[1];
+            using (RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider())
+            {
+                crypto.GetNonZeroBytes(data);
+                data = new byte[maxSize];
+                crypto.GetNonZeroBytes(data);
+            }
+            StringBuilder result = new StringBuilder(maxSize);
+            foreach (byte b in data)
+            {
+                result.Append(chars[b % (chars.Length)]);
+            }
+            return result.ToString();      
+        }
+
+        public void UpdatePassword(User user ,string password)
+        {
+            user.Password = password;
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
         }
     }
 }
