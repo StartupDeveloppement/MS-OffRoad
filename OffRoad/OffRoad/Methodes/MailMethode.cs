@@ -8,7 +8,8 @@ namespace OffRoad.Methodes
 {
     public class MailMethode
     {
-        public void SendMail(string to, string subject, string body) {
+        public void SendMail(string to, string subject, string body)
+        {
             MailMessage mail = new MailMessage();
             mail.To.Add(to);
             mail.From = new MailAddress("Offroaddev@gmail.com");

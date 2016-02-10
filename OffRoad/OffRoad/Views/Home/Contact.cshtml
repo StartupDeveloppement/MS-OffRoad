@@ -11,7 +11,7 @@
     </div>
 </div>
 
-<div class="container body-content">
+<div class="container body-content center-">
     <div class="row">
         <div class="col-md-4 marge-info">
             <h3>Rendez-nous visite</h3>
@@ -32,6 +32,8 @@
         <div class="col-md-6">
             <h3>Quelque chose à nous dire ?</h3>
             <br />
+            @using (Html.BeginForm("SendEmail", "Home", FormMethod.Post, null))
+            {
             <div class="row">
                 <div class="col-md-6 form-group">                
                         @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Prénom" } })
@@ -54,11 +56,12 @@
             </div>
             <div class="row">
                 <div class="col-md-12 form-group">
-                    @Html.TextAreaFor(model => model.Message, new { @class = "form-control textarea", @rows = "6", @placeholder = "Message" } )
+                    @Html.TextAreaFor(model => model.Message, new { @class = "form-control textarea", @rows = "6", @placeholder = "Message" })
                     @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
                 </div>
             </div>
-            @Html.ActionLink("Envoyer le Mail", "SendEmail", null, new { @class = "btn btn-success" })
+            <button class="btn btn-success" type="submit">Envoyer le Mail</button>
+            }
         </div>
     </div>
     <div class="row">
