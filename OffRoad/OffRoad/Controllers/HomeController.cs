@@ -26,7 +26,8 @@ namespace OffRoad.Controllers
         {
             try
             {
-                mailMethode.SendMail(email.Mail, "[Contact]"+email.LastName+" "+email.FirstName, email.Message);
+                string subject = String.Format("[Contact] {0} {1} {2}", email.LastName, email.FirstName, email.Phone); 
+                mailMethode.SendMail(email.Mail, subject, email.Message);
                 return View("Index");
             }
             catch
