@@ -143,6 +143,7 @@
     <Compile Include="Methodes\AuthMethode.cs" />
     <Compile Include="Methodes\BackOfficeMethode.cs" />
     <Compile Include="Methodes\EventMethode.cs" />
+    <Compile Include="Methodes\MailMethode.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Avatar.cs" />
     <Compile Include="Models\Category.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="Models\EventUser.cs" />
     <Compile Include="Models\Email.cs" />
     <Compile Include="Models\LogIn.cs" />
+    <Compile Include="Models\MailModel.cs" />
     <Compile Include="Models\Register.cs" />
     <Compile Include="Models\Roles.cs" />
     <Compile Include="Models\User.cs" />
@@ -189,6 +191,7 @@
     <Content Include="Scripts\ckeditor\ckeditor_php4.php" />
     <Content Include="Scripts\ckeditor\ckeditor.php" />
     <Content Include="Scripts\ckeditor\ckeditor.pack" />
+    <None Include="Properties\PublishProfiles\Amen.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor_source.js" />
     <Content Include="Scripts\ckeditor\config.js" />
@@ -543,7 +546,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
