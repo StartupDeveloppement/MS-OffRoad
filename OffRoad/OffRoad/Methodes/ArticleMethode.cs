@@ -18,5 +18,23 @@ namespace OffRoad.Methodes
                                       select b;
             return requeteCommentaires.ToList<ArticleComment>();
         }
+
+        public List<Article> GetArticleByCategory(int idCategory)
+        {
+            var requeteArticle = from b in db.Articles
+                                      where b.Category.Id == idCategory
+                                      select b;
+            return requeteArticle.ToList<Article>();
+        }
+
+        public List<Article> GetRecentsArticles()
+        {
+            var requeteArticle = (
+                                 from b in db.Articles
+                                 select b
+                                 )
+                                 .Take(8).OrderByDescending(b => b.CreateDate);
+            return requeteArticle.ToList<Article>();
+        }
     }
 }

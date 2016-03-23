@@ -23,8 +23,23 @@ namespace OffRoad.Controllers
 
         [AllowAnonymous]
         // GET: Articles
-        public ActionResult Index()
+        public ActionResult Index(int? idCategory)
         {
+            ViewBag.Categories = db.Categorys.ToList();
+            if (idCategory != null)
+            {
+                Category category = db.Categorys.Find(idCategory);
+                if (category != null)
+                {
+                    List<Article> articleList = artM.GetArticleByCategory(category.Id);
+                    ViewBag.Categpory = category.Label;
+                    return View(articleList);                   
+                }
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
             return View(db.Articles.ToList());
         }
 
@@ -32,10 +47,12 @@ namespace OffRoad.Controllers
         // GET: Articles/Details/5
         public ActionResult Details(int? id)
         {
+           
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+           
             Article article = db.Articles.Find(id);
             if (article == null)
             {

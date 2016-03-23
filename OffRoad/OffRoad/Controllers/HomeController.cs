@@ -1,4 +1,5 @@
-﻿using OffRoad.Methodes;
+﻿using OffRoad.Context;
+using OffRoad.Methodes;
 using OffRoad.Models;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,15 @@ namespace OffRoad.Controllers
 {
     public class HomeController : Controller
     {
-        private MailMethode mailMethode = new MailMethode(); 
+        private MailMethode mailMethode = new MailMethode();
+        private DBContext db = new DBContext();
+        private ArticleMethode artM = new ArticleMethode();
+
         public ActionResult Index()
         {
-            return View();
+            ViewBag.Categories = db.Categorys.ToList();
+            List<Article> articleList = artM.GetRecentsArticles();
+            return View(articleList);
         }
 
         public ActionResult Contact()

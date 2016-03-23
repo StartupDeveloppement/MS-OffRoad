@@ -9,9 +9,56 @@
     padding-right: 15px;
 }
 
+#article-title{
+
+    font-size : 25px;
+    font-family : Arial;
+}
+
+a{
+    color : #9197a3;
+}
+
+#category{
+        background-color : #ddd;
+        font-size : 11px;
+}
+
+footer{
+    margin-top : 55px;
+}
+
+.article-element{
+    margin-right: 8px;
+    font-size : 15px;
+    font-family : Arial;
+}
+
+.right-side{
+    background-color : #F5F5F5;
+    font-weight : bold;
+    margin-bottom : 15px;
+    margin-top : 20px;
+}
+
+.center{
+        text-align: center;
+}
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
     max-width: 280px;
 }
+
+#image-home {
+        z-index: 0;
+        position:relative;
+        }
+
+#texte-home {
+        z-index: 1;
+        text-align: center;
+        color:white;
+        position:relative;
+        }

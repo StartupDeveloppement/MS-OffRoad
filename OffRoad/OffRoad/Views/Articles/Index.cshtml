@@ -4,55 +4,75 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="container-fluid">
+    <div class="row banner">
+        <div class="col-md-12">
+            <div id="image-home">
+                <img class="img-responsive" src="~/Content/Image/multi-article.png" />
+            </div>
+        </div>
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Text)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PicturePath)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EditDate)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Text)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreateDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PicturePath)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EditDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
+<div class="container">
+    <br />
+    @if (ViewBag.Category != null)
+    {
+        <span id="article-title">Categorie : @ViewBag.Category</span><br/><hr />
+    }
+    <div class="col-md-8">
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="col-md-1">
+                    <a href="@Url.Action("Details", "Articles", new {id = item.Id})"><img width="126" src="~/Content/Image/offroad.jpg" /></a>
+                </div>
+                <div class="col-md-5 col-lg-offset-1">
+                    <br />
+                    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                    <span class="article-element">@Html.DisplayFor(model => item.CreateDate)</span>
+                    <span class="glyphicon glyphicon-user"></span>
+                    <span class="article-element">@Html.DisplayFor(model => item.Author.NickName)</span>
+                    <span class="glyphicon glyphicon-comment"></span>
+                    <span class="article-element">5</span><br /><br />
+                    <span id="article-title">@Html.DisplayFor(model => item.Title)</span><br />
+                </div>
+            </div>
+            <br />
+        }
+    </div>
+    <div class="col-md-4">  
+        <div class="row">
+            <div class="right-side">
+                <div class="center">
+                    <span>SUIVEZ-NOUS SUR FACEBOOK</span><br /><br />
+                    <iframe src="http://www.facebook.com/plugins/likebox.php?
+                        href=http%3A%2F%2Fwww.facebook.com%2FFrancefootball.fr&amp;
+                        width=292&amp;colorscheme=light&amp;show_faces=false&amp;
+                        border_color&amp;stream=false&amp;header=false&amp;height=62"
+                            scrolling="no" frameborder="0" style="border:none; overflow:
+                        hidden;width:292px; height:62px;" allowTransparency="true"></iframe>
+                </div>
+                <br />
+                <img width="20px" src="~/Content/Image/icon-fb.png" />
+                <span style="font-size : 10px">FaceBook Social Design</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="right-side">
+                <div class="center">
+                    <span>CATEGORIES</span>
+                </div>
+                <br />
+                <div class="container">
+                    @foreach (var cat in ViewBag.Categories)
+                    {
+                        <div class="col-md-4">
+                            <a id="category" href="@Url.Action("Index","Articles", new { idCategory = cat.Id})">@cat.Label</a>
+                        </div >
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
