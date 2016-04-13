@@ -4,128 +4,140 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Event</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreateDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EditDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EditDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BeginDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BeginDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Place)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Place)
-        </dd>
-
-    </dl>
+<div class="container-fluid">
+    <div class="row banner">
+        <div class="col-md-12">
+            <img src="~/Content/Image/header_event.png" class="img-responsive" />
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
 
-@if (ViewBag.Comments != null)
-{
-    foreach (var comment in ViewBag.Comments)
-    {
-        <div class='col-md-8'>
-            <div class='row com'>
-                <div class="col-md-3">
-                    <div>
-                        @{
-                            OffRoad.Models.EventComment com = new OffRoad.Models.EventComment();
-                            OffRoad.Context.DBContext db = new OffRoad.Context.DBContext();
-                            com = comment;
-                            var requeteUser = from b in db.Users
-                                              where b.Id.Equals(com.User.Id)
-                                              select b;
-                            var infoUserComment = requeteUser.FirstOrDefault();
-
-                        }
-                        @if (@infoUserComment == null)
-                    {
-                            <p>Publié par un utilisateur n'ayant plus de compte</p>
-                        }
-                        else
-                        {
-                            <p>@infoUserComment.NickName</p>
-                        }
-
+<div class="container">
+    <div class="col-md-8 col-lg-offset-2" id="event_detail">
+        <div class="row">
+            <div class="col-md-1 date">
+                @Model.BeginDate.Value.ToString("dd \n MMM")
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-12 titre">
+                        @Model.Title
                     </div>
                 </div>
-                <div class="col-md-9">
-                    <div>@comment.CreateDate.ToString("dd/MM/yyyy HH:mm")</div>
-                    <div>@Html.Raw(System.Web.HttpUtility.HtmlDecode(comment.Text))</div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <span>Organisé par: @Model.Owner.NickName</span>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="@Url.Action("Edit","Events",new {id = Model.Id})"> <span class="glyphicon glyphicon-pencil"></span></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <span>Crée le: @Model.CreateDate.Value.ToString("dd/MM/yyyy")</span>
+                    </div>
+                    <div class="col-md-6">
+                        <span>Modifié le: @Model.EditDate.Value.ToString("dd/MM/yyyy")</span>
+                    </div>
                 </div>
             </div>
-        </div>}
-                            }
-
-<h3>Commentaire</h3>
-@using (Html.BeginForm("CreateComment", "Events", new { idEvent = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-    <div class="col-md-8">
-        <div class="form-horizontal">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                <textarea name="Text" id="textarea" rows="6" class="form-control"> </textarea>
+        </div>
+        <div class="row" id="description">
+            <div class="row">
+                <div class="col-md-6 titre">
+                    <span>Détail :</span>
+                </div>
             </div>
-
-            <div class="form-group">
-                <a href="/Events/Index" class="btn btn-default">Précédent</a>
-                <input type="submit" value="Créer" class="btn btn-default" />
+            <div class="row">
+                <div class="col-md-12">
+                    <span>@Model.Description</span>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="map">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-md-6 titre">
+                        <span>Lieu :</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <iframe class="col-md-12" height="300" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d20373.254736985906!2d3.030549446994956!3d50.33565312801259!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c2ca3be0786971%3A0x40af13e8163f630!2sCorbehem!5e0!3m2!1sfr!2sfr!4v1453903591576" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-}
+</div>
+
+<div class="container">
+    <div class="col-md-7 col-lg-offset-2" id="event_commentaire">
+        <div class="row">
+            <span class="titre">Commentaire </span>
+        </div>
+        @if (ViewBag.Comments != null)
+        {
+            foreach (var comment in ViewBag.Comments)
+            {
+                OffRoad.Models.EventComment com = new OffRoad.Models.EventComment();
+                OffRoad.Context.DBContext db = new OffRoad.Context.DBContext();
+                com = comment;
+                var requeteUser = from b in db.Users
+                                  where b.Id.Equals(com.User.Id)
+                                  select b;
+                var infoUserComment = requeteUser.FirstOrDefault();
+
+                <div class="row comm">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if (@infoUserComment == null)
+                            {
+                                <span class="user">Anonyme</span>
+                            }
+                            else
+                            {
+                                <span class="user">@infoUserComment.NickName</span>
+                            }
+
+                            <span class="date">@comment.CreateDate.ToString("dd MMMM yyyy HHhmm")</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span>@Html.Raw(System.Web.HttpUtility.HtmlDecode(comment.Text))</span>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+        <button type="button" class="btn btn-success  btn-block add_com" onclick="addcom()">Ajouter un commentaire</button>
+
+        @using (Html.BeginForm("CreateComment", "Events", new { idEvent = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="col-md-12">
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <textarea name="Text" id="textarea" rows="6" class="form-control"> </textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Créer" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+    <script type="text/javascript">
+        $(function () {
+           // $('#textarea').ckeditor();
+            CKEDITOR.replace('textarea', { customConfig: 'configcom.js' });
+        });
+    </script>
+    </div>
+</div>
+
 
