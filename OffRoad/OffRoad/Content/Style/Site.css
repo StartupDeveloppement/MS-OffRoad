@@ -87,7 +87,7 @@ textarea {
     text-align:left;
 }
 
-.event_detail{
+.event_detail, #event_commentaire .ckeditor{
     display:none;
 }
 
