@@ -62,15 +62,15 @@ textarea {
     position: relative;
 }
 
-.block-event{
+.block-event,#event_detail{
     border:solid #dbdbdb 1px;
 }
 
-.block-event .date{
+.block-event .date,#event_detail .date{
     font-weight:bold;
     text-align:center;
     font-size:x-large;
-    margin:0px 10px;
+    padding:0px 10px;
 }
 
 .block-event .title{
@@ -89,4 +89,44 @@ textarea {
 
 .event_detail{
     display:none;
+}
+
+#event_detail .date{
+    background-color:#79b42b;
+    color:white; 
+}
+
+#event_detail .titre,#event_commentaire .titre{
+    font-size:x-large;
+    font-weight:bold;
+}
+
+#description{
+    border-top:solid #dbdbdb 1px;
+    padding-left:10px;
+}
+
+#description .titre,#map .titre{
+    font-size:large;
+}
+
+#event_commentaire{
+    margin-top:20px;
+}
+
+#event_commentaire .user{
+    color:#79b42b;
+}
+
+#event_commentaire .date{
+    color:grey;
+}
+
+#event_commentaire .comm{
+    margin-left:15px;
+    border-bottom:solid 1px #e3e3e3;
+}
+
+#event_commentaire .add_com{
+    margin-top:20px;
 }
