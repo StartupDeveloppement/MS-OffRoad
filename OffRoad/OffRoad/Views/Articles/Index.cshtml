@@ -39,6 +39,9 @@
                 </div>
             </div>
             <br />
+            @Html.ActionLink("Modifier", "Edit", "Articles", new { id = item.Id }, new { @class = "btn btn-success" })
+            @Html.ActionLink("Supprimer", "Delete", "Articles", new { id = item.Id }, new { @class = "btn btn-danger" })
+            <hr />
         }
     </div>
     <div class="col-md-4">  

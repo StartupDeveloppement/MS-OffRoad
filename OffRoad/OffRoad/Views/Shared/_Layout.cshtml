@@ -17,6 +17,7 @@
     @Scripts.Render("~/bundles/datepicker")
     <script type="text/javascript" src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script type="text/javascript" src="~/Scripts/ckeditor/ckeditor.js"></script>    
+    <script type="text/javascript" src="~/Scripts/ckeditor/adapters/jquery.js"></script>
 </head>
 <body>
     <div id="page">
@@ -38,19 +39,19 @@
                 <ul class="nav navbar-nav">
                     <li>
                         <a href='@Url.Action("Index", "Articles")'>
-                            <img src='@Url.Content("~/Content/Image/Article.png")' class="icon"/>
+                            <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> 
                             ARTICLES
                         </a>
                     </li>
                     <li>
                         <a href='@Url.Action("Index", "Events")'>
-                            <img src='@Url.Content("~/Content/Image/Coeur.png")' class="icon" />
+                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> 
                             EVENEMENTS
                         </a>
                     </li>
                     <li>
-                        <a href='@Url.Action("Index", "Galleries")'>
-                            <img src='@Url.Content("~/Content/Image/Polaroid.png")' class="icon" />
+                        <a href='#'>
+                            <span class="glyphicon glyphicon-camera" aria-hidden="true"></span> 
                             GALLERIES
                         </a>
                     </li>
@@ -58,19 +59,19 @@
                     {
                     <li>
                         <a href='@Url.Action("Index", "BackOffice")'>
-                            <img src='@Url.Content("~/Content/Image/users.png")' class="icon" />
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 
                             UTILISATEURS
                         </a>
                     </li>
                     <li>
                         <a href='@Url.Action("MonCompte", "BackOffice")'>
-                            <img src='@Url.Content("~/Content/Image/users.png")' class="icon" />
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 
                             MON COMPTE
                         </a>
                     </li>
                     <li>
                         <a href='@Url.Action("LogOut", "Auth")'>
-                            <img src='@Url.Content("~/Content/Image/Pointeur.png")' class="icon" />
+                            <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> 
                             DECONNEXION
                         </a>
                     </li>
@@ -131,5 +132,10 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     @RenderSection("CreateEvent", required: false)
+    <script type="text/javascript">
+    $(function () {
+        $('#textarea').ckeditor();
+    });
+    </script>
 </body>
 </html>

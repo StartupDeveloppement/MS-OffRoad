@@ -21,7 +21,6 @@ namespace OffRoad.Controllers
         private AuthMethode authM = new AuthMethode();
         private ArticleMethode artM = new ArticleMethode();
 
-        [AllowAnonymous]
         // GET: Articles
         public ActionResult Index(int? idCategory)
         {
@@ -43,7 +42,6 @@ namespace OffRoad.Controllers
             return View(db.Articles.ToList());
         }
 
-        [AllowAnonymous]
         // GET: Articles/Details/5
         public ActionResult Details(int? id)
         {
