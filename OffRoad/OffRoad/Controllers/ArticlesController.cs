@@ -50,7 +50,7 @@ namespace OffRoad.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-           
+            User user = db.Users.FirstOrDefault(u => u.NickName == User.Identity.Name);
             Article article = db.Articles.Find(id);
             if (article == null)
             {
