@@ -84,6 +84,7 @@
     </table>
     <a id="button-color" class="btn btn-default" href="/BackOffice/Index">Précédent</a>
     <input type="submit" value="Modifier" class="btn btn-default" />
+    @Html.ActionLink("Supprimer", "Desactive", new { Id = Model.Id })
 </form>
 
 <script type="text/javascript">

@@ -38,7 +38,7 @@ namespace OffRoad.Provider
             var requeteRoleForUser = from b in db.UserRole
                                      where b.IdUser.Id.Equals(userId)
                                      select b.Roles;
-            return requeteRoleForUser.First();
+            return requeteRoleForUser.FirstOrDefault();
         }
     }
 }

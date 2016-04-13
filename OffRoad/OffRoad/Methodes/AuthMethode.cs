@@ -113,6 +113,14 @@ namespace OffRoad.Methodes
             return userRequete.FirstOrDefault();
         }
 
+        public List<User> GetActiveUser()
+        {
+            var userRequete = from b in db.Users
+                              where b.Active.Equals(true)
+                              select b;
+            return userRequete.ToList();
+        }
+
         public User GetCurrentUserById(int idUser)
         {
             var userRequete = from b in db.Users

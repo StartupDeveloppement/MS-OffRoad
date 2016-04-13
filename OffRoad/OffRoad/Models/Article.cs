@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace OffRoad.Models
 {
@@ -12,6 +13,7 @@ namespace OffRoad.Models
         public int Id { get; set; }
 
         [Required]
+        [AllowHtml]
         [Display(Name = "Corps")]
         public string Text { get; set; }
 

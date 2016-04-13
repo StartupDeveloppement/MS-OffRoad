@@ -24,6 +24,7 @@ namespace OffRoad.Controllers
         {
             User currentUser = AM.GetCurrentUser(HttpContext.User.Identity.Name);
             Roles roleUser = roleProvider.GetRoleForUser(currentUser);
+            var listActiveUser = AM.GetActiveUser();
             ViewBag.RoleId = roleUser.Id;
             return View(db.Users.ToList());
         }
@@ -137,14 +138,8 @@ namespace OffRoad.Controllers
         
 
         public ActionResult Desactive(int id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            System.Web.Security.FormsAuthentication.SignOut();
-            return Redirect("/Home/Index");
+        {           
+            return View(db.Users.Find(id));
         }
 
         public ActionResult DesactiveAccountUser()
