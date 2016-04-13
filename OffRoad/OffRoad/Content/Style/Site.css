@@ -1,6 +1,6 @@
 ﻿body {
     padding-top: 50px;
-    position:relative;
+    position: relative;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -9,40 +9,39 @@
     padding-right: 15px;
 }
 
-#article-title{
-
-    font-size : 25px;
-    font-family : Arial;
+#article-title {
+    font-size: 25px;
+    font-family: Arial;
 }
 
-a{
-    color : #9197a3;
+a {
+    color: #9197a3;
 }
 
-#category{
-        background-color : #ddd;
-        font-size : 11px;
+#category {
+    background-color: #ddd;
+    font-size: 11px;
 }
 
-footer{
-    margin-top : 55px;
+footer {
+    margin-top: 55px;
 }
 
-.article-element{
+.article-element {
     margin-right: 8px;
-    font-size : 15px;
-    font-family : Arial;
+    font-size: 15px;
+    font-family: Arial;
 }
 
-.right-side{
-    background-color : #F5F5F5;
-    font-weight : bold;
-    margin-bottom : 15px;
-    margin-top : 20px;
+.right-side {
+    background-color: #F5F5F5;
+    font-weight: bold;
+    margin-bottom: 15px;
+    margin-top: 20px;
 }
 
-.center{
-        text-align: center;
+.center {
+    text-align: center;
 }
 /* Set width on the form input elements since they're 100% wide by default */
 input,
@@ -52,13 +51,42 @@ textarea {
 }
 
 #image-home {
-        z-index: 0;
-        position:relative;
-        }
+    z-index: 0;
+    position: relative;
+}
 
 #texte-home {
-        z-index: 1;
-        text-align: center;
-        color:white;
-        position:relative;
-        }
+    z-index: 1;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+.block-event{
+    border:solid #dbdbdb 1px;
+}
+
+.block-event .date{
+    font-weight:bold;
+    text-align:center;
+    font-size:x-large;
+    margin:0px 10px;
+}
+
+.block-event .title{
+    font-weight:bold;
+    font-size:large;
+}
+
+.block-event .type{
+    color:#a0a0a0;
+    font-style:italic;
+}
+
+.block-event .button-arrow{
+    text-align:left;
+}
+
+.event_detail{
+    display:none;
+}

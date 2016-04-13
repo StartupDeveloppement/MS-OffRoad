@@ -4,66 +4,96 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="container-fluid">
+    <div class="row banner">
+        <div class="col-md-12">
+            <img src="~/Content/Image/header_event.png" class="img-responsive" />
+        </div>
+    </div>
+</div>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BeginDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Place)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EditDate)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreateDate)
-        </td>
-        <td>
-            @item.BeginDate.Value.ToString("dd/MMM/yyyy")
-        </td>
-        <td>
-            @item.EndDate.Value.ToString("dd/MMM/yyyy")
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Place)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EditDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-2">
+            <span>Restez informé et suivez les évènements de l'association :</span>
+        </div>
+        <div class="col-md-1">
+            @Html.ActionLink("Nouvelle Evenements", "Create", "Events", new { @class = "btn btn-success" })
+        </div>
+    </div>
+    @foreach (var item in Model)
+    {
 
-</table>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 block-event">
+                <div class="row">
+                    <div class="col-md-1 date">
+                        @item.BeginDate.Value.ToString("dd \n MMM")
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-md-11 title">
+                                <span>@item.Title</span>
+                            </div>
+                            <div class="col-md-1">
+                                <span class="glyphicon glyphicon-chevron-down" id="glyph_@item.Id" onclick="event_plus(@item.Id)"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <span class="glyphicon glyphicon-time"></span>
+                                <span>9h00 - 17h00</span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="glyphicon glyphicon-map-marker"></span>
+                                <span>@item.Place</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a href="@Url.Action("Details","Events",new {id = item.Id})">Voir l'évènement</a>
+                            </div>
+                            <div class="col-md-2">
+                                <a href="@Url.Action("Edit","Events",new {id = item.Id})"> <span class="glyphicon glyphicon-pencil"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row event_detail" id="event_@item.Id">
+                    <div class="row">
+                        <div class="col-md-2 col-md-offset-1">
+                            <span>Détail:</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <p>@item.Description</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script type="text/javascript" >
+    function event_plus(x) {
+        
+        block = document.getElementById("event_" + x);
+        glyph = document.getElementById("glyph_" + x);
+
+        if (block.style.display == "block") {
+            block.style.display = "none";
+            glyph.className = "glyphicon glyphicon-chevron-down";
+        }
+        else {
+            block.style.display = "block";
+            glyph.className = "glyphicon glyphicon-chevron-up";
+        }
+
+    }
+</script>
