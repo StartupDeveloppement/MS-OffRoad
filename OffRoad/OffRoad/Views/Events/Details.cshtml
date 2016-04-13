@@ -29,7 +29,7 @@
                         <span>Organisé par: @Model.Owner.NickName</span>
                     </div>
                     <div class="col-md-2">
-                        <a href="@Url.Action("Edit","Events",new {id = Model.Id})"> <span class="glyphicon glyphicon-pencil"></span></a>
+                        <a href="@Url.Action("Edit", "Events", new { id = Model.Id })"> <span class="glyphicon glyphicon-pencil"></span></a>
                     </div>
                 </div>
                 <div class="row">
@@ -37,7 +37,9 @@
                         <span>Crée le: @Model.CreateDate.Value.ToString("dd/MM/yyyy")</span>
                     </div>
                     <div class="col-md-6">
+                        @if(Model.EditDate.Value != null){ 
                         <span>Modifié le: @Model.EditDate.Value.ToString("dd/MM/yyyy")</span>
+                        }
                     </div>
                 </div>
             </div>
