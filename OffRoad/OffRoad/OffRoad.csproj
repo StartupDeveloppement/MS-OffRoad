@@ -164,6 +164,7 @@
     <Content Include="Content\Image\Article.png" />
     <Content Include="Content\Image\banniere-article.png" />
     <Content Include="Content\Image\Coeur.png" />
+    <Content Include="Content\Image\edit-article.png" />
     <Content Include="Content\Image\header_connexion.png" />
     <Content Include="Content\Image\header_inscription.png" />
     <Content Include="Content\Image\header_contact.png" />
@@ -171,6 +172,7 @@
     <Content Include="Content\Image\home.png" />
     <Content Include="Content\Image\icon-fb.png" />
     <Content Include="Content\Image\multi-article.png" />
+    <Content Include="Content\Image\creer-article-page.png" />
     <Content Include="Content\Image\offroad.jpg" />
     <Content Include="Content\Image\Pointeur.png" />
     <Content Include="Content\Image\Polaroid.png" />
