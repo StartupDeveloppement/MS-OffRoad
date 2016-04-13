@@ -170,11 +170,12 @@ namespace OffRoad.Controllers
         public ActionResult CreateComment([Bind(Include = "Id,Text,Utilisateur,Date")] ArticleComment commentaires, int idArticle)
         {
             User user = authM.GetCurrentUser(HttpContext.User.Identity.Name);
+            User userToSave = db.Users.Find(user.Id);
             if (user == null)
             {
                 return HttpNotFound();
             }
-            commentaires.User = user;
+            commentaires.User = userToSave;
             commentaires.CreateDate = DateTime.Now;
             if (idArticle != 0)
                 commentaires.Article = db.Articles.Find(idArticle);

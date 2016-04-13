@@ -142,12 +142,13 @@ namespace OffRoad.Controllers
         public ActionResult CreateComment([Bind(Include = "Id,Text,Utilisateur,Date")] EventComment commentaires, int idEvent)
         {
             User user = authM.GetCurrentUser(HttpContext.User.Identity.Name);
+            User userToSave = db.Users.Find(user.Id);
             if (user == null)
             {
               
                 return HttpNotFound();
             }
-            commentaires.User = user;
+            commentaires.User = userToSave;
             commentaires.CreateDate = DateTime.Now;
             if (idEvent != 0)
                 commentaires.Event = db.Events.Find(idEvent);

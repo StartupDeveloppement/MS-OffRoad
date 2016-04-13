@@ -15,7 +15,6 @@
 </div>
 
 <div class="container">
-    <div class="col-md-8">
         <br />
         <span id="article-title">@Html.DisplayFor(model => model.Title)</span><br />
         <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
@@ -25,80 +24,8 @@
         <span class="glyphicon glyphicon-comment"></span>
         <span class="article-element">5</span><br /><br />
         @Html.DisplayNameFor(model => model.Text)
-
-    </div>
-    <div class="col-md-4">
-        <br>
-        <div class="right-side">
-            <div class="center">
-                <span>SUIVEZ-NOUS SUR FACEBOOK</span><br /><br />
-                <iframe src="http://www.facebook.com/plugins/likebox.php?
-                    href=http%3A%2F%2Fwww.facebook.com%2FFrancefootball.fr&amp;
-                    width=292&amp;colorscheme=light&amp;show_faces=false&amp;
-                    border_color&amp;stream=false&amp;header=false&amp;height=62"
-                                    scrolling="no" frameborder="0" style="border:none; overflow:
-                    hidden;width:292px; height:62px;" allowTransparency="true">
-                </iframe>
-            </div>
-            <br />
-            <img width="20px" src="~/Content/Image/icon-fb.png" />
-            <span style="font-size : 10px">FaceBook Social Design</span>
-       </div>
-       
-    </div>
 </div>
-@*<div>
-    <h4>Article</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Text)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Text)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreateDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EditDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EditDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PicturePath)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PicturePath)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>*@
-
-@*@if(ViewBag.Comments != null)
+@if(ViewBag.Comments != null)
 {
 foreach (var comment in ViewBag.Comments)
 {
@@ -135,7 +62,7 @@ foreach (var comment in ViewBag.Comments)
     </div>}
                         }
 
-
+<div class="container">
 @using (Html.BeginForm("CreateComment", "Articles", new { idArticle = Model.Id}, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -153,7 +80,7 @@ foreach (var comment in ViewBag.Comments)
         </div>
     </div>
 }
-
+</div>
 <script>
     CKEDITOR.replace('Text', { customConfig: 'configcom.js' });
-</script>*@  
+</script>
