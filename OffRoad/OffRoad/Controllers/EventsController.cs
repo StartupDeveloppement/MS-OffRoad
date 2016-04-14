@@ -103,6 +103,7 @@ namespace OffRoad.Controllers
         public ActionResult Edit([Bind(Include = "Id,Title,Description,CreateDate,BeginDate,EndDate,Place")] Event evenement)
         {
             User user = db.Users.FirstOrDefault(u => u.NickName == User.Identity.Name);
+            evenement.Owner = user;
             evenement.EditDate = DateTime.Now;
             if (evenement.BeginDate > evenement.EndDate)
             {
@@ -112,7 +113,7 @@ namespace OffRoad.Controllers
             if (ModelState.IsValid)
             {
                 evenement.CreateDate = createDateSave;
-                evenement.Owner = user;
+    
                 db.Entry(evenement).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

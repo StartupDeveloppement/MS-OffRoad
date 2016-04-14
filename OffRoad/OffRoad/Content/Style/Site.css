@@ -130,3 +130,7 @@ textarea {
 #event_commentaire .add_com{
     margin-top:20px;
 }
+
+#btn_supp{
+    text-align:center;
+}

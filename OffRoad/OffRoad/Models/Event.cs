@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace OffRoad.Models
 {
@@ -16,6 +17,7 @@ namespace OffRoad.Models
         public string Title { get; set; }
 
         [Required(ErrorMessage = "Ce champ est obligatoire")]
+        [AllowHtml]
         public string Description { get; set; }
 
         [Display(Name = "Date de création")]

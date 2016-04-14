@@ -55,6 +55,16 @@
                     <span>@Model.Description</span>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-6 titre">
+                    <span>Horaire :</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <span>De @Model.BeginDate.Value.ToString("dd MMMM yyyy HH:mm") à @Model.EndDate.Value.ToString("dd MMMM yyyy HH:mm") </span>
+                </div>
+            </div>
         </div>
         <div class="row" id="map">
             <div class="col-lg-12">
@@ -102,7 +112,7 @@
                                 <span class="user">@infoUserComment.NickName</span>
                             }
 
-                            <span class="date">@comment.CreateDate.ToString("dd MMMM yyyy HHhmm")</span>
+                            <span class="date">@comment.CreateDate.ToString("dd MMMM yyyy HH:mm")</span>
                         </div>
                     </div>
                     <div class="row">
