@@ -24,6 +24,10 @@ namespace OffRoad.Controllers
         // GET: Events
         public ActionResult Index()
         {
+            User user = db.Users.FirstOrDefault(u => u.NickName == User.Identity.Name);
+            OffRoad.Provider.RoleProvider roleProvider = new OffRoad.Provider.RoleProvider();
+            Roles role = roleProvider.GetRoleForUser(user);
+            ViewBag.Role = role.Id;
             return View(db.Events.ToList());
         }
 
@@ -34,11 +38,15 @@ namespace OffRoad.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            User user = db.Users.FirstOrDefault(u => u.NickName == User.Identity.Name);
             Event evenement = db.Events.Find(id);
+            var roleProvider = new OffRoad.Provider.RoleProvider();
+            var role = roleProvider.GetRoleForUserId(user.Id);
             if (evenement == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.Role = role.Id;
             ViewBag.Comments = eventM.GetCommentairesForEvent(evenement.Id);
             return View(evenement);
         }

@@ -57,9 +57,12 @@
                             <div class="col-md-4">
                                 <a href="@Url.Action("Details","Events",new {id = item.Id})">Voir l'évènement</a>
                             </div>
-                            <div class="col-md-2">
-                                <a href="@Url.Action("Edit","Events",new {id = item.Id})"> <span class="glyphicon glyphicon-pencil"></span></a>
-                            </div>
+                            @if (ViewBag.Role == 1)
+                            {
+                                <div class="col-md-2">
+                                    <a href="@Url.Action("Edit", "Events", new { id = item.Id })"> <span class="glyphicon glyphicon-pencil"></span></a>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
