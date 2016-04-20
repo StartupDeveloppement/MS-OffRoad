@@ -44,10 +44,13 @@ footer {
     text-align: center;
 }
 /* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
+
+select {
     max-width: 280px;
+}
+
+textarea{
+    width:100%;
 }
 
 #image-home {
@@ -96,7 +99,7 @@ textarea {
     color:white; 
 }
 
-#event_detail .titre,#event_commentaire .titre{
+#titre,#event_commentaire .titre{
     font-size:x-large;
     font-weight:bold;
 }
@@ -133,4 +136,26 @@ textarea {
 
 #btn_supp{
     text-align:center;
+}
+
+#texte{
+    width:100%;
+
+}
+
+#art_commentaire{
+    border:1px solid #e0e0e0;
+    background-color:#f3f3f3;
+}
+
+.text_comm{
+    padding-left:10px;
+}
+
+#info_article{
+    color:#9e9e9e;
+}
+
+#info_article span{
+    padding-left:5px;
 }

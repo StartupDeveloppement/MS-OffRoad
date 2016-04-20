@@ -4,48 +4,30 @@
     ViewBag.Title = "Create";
 }
 
+
 <div class="container-fluid">
     <div class="row banner">
         <div class="col-md-12">
             <div id="image-home">
-                <img class="img-responsive" src="~/Content/Image/creer-article-page.png" />
+                <img class="img-responsive" src="~/Content/Image/header_article.png" />
             </div>
         </div>
     </div>
 </div>
 
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="container">
+    <div class="row">
         <div class="form-group">
             <div class="col-md-10">
-                <textarea name="Text" id="Text" rows="6" class="form-control"> </textarea>
-                @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger" })
+                <label>Titre de l'article</label>
+                <input type="text" class="form-control" placeholder="Titre de l'article">
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PicturePath, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PicturePath, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PicturePath, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Catégorie</label>
                 <select class="form-control" name="Category">
                     @foreach (var cat in ViewBag.Categories)
                     {
@@ -53,19 +35,27 @@
                     }
                 </select>
                 @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Image</label>
+                @Html.EditorFor(model => model.PicturePath, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PicturePath, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
-}
-@Html.Hidden("Author", "a")
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <div class="row">
+        <textarea name="Text" id="Text" rows="6" class="form-control"> </textarea>
+    </div>
+    <div class="row">
+        <div class="form-actions" id="btn_supp">
+            <input type="submit" value="Publier l'aricle" class="btn btn-success btn-lg" />
+        </div>
+    </div>
 </div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

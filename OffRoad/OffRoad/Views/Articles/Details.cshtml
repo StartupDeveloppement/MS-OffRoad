@@ -15,72 +15,72 @@
 </div>
 
 <div class="container">
-        <br />
-        <span id="article-title">@Html.DisplayFor(model => model.Title)</span><br />
-        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-        <span class="article-element">@Html.DisplayFor(model => model.CreateDate)</span>
-        <span class="glyphicon glyphicon-user"></span>
-        <span class="article-element">@Html.DisplayFor(model => model.Author.NickName)</span>
-        <span class="glyphicon glyphicon-comment"></span>
-        <span class="article-element">5</span><br /><br />
-        @Html.DisplayNameFor(model => model.Text)
-</div>
-@if(ViewBag.Comments != null)
-{
-foreach (var comment in ViewBag.Comments)
-{
-    <div class='col-md-8'>
-        <div class='row com'>
-            <div class="col-md-3">
-                <div>
-                    @{
-                        OffRoad.Models.ArticleComment com = new OffRoad.Models.ArticleComment();
-                        OffRoad.Context.DBContext db = new OffRoad.Context.DBContext();
-                        com = comment;
-                        var requeteUser = from b in db.Users
-                                          where b.Id.Equals(com.User.Id)
-                                          select b;
-                        var infoUserComment = requeteUser.FirstOrDefault();
-
-                    }
-                    @if (@infoUserComment == null)
-                    {
-                        <p>Publié par un utilisateur n'ayant plus de compte</p>
-                    }
-                    else
-                    {
-                        <p>@infoUserComment.NickName</p>
-                    }
-
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div>@comment.CreateDate.ToString("dd/MM/yyyy HH:mm")</div>
-                <div>@Html.Raw(System.Web.HttpUtility.HtmlDecode(comment.Text))</div>
+    <div class="col-md-8 col-md-offset-2">
+        <div class="row">
+            <div class="col-md-12">
+                <span id="titre">TITRE DE L'ARTICLE</span>
             </div>
         </div>
-    </div>}
-                        }
+        <div class="row">
+            <div class="col-md-12" id="info_article">
+                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> 12 avril 2016
 
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Philou
+
+                <span class=" glyphicon glyphicon-comment" aria-hidden="true"></span> 22
+            </div>
+        </div>
+        <div class="row">
+            <img src="~/Content/Image/multi-article.png" class="img-responsive img-rounded" alt="Responsive image">
+        </div>
+        <div class="row">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut suscipit auctor rhoncus. Etiam semper risus sit amet ipsum gravida, ut sodales turpis scelerisque. Phasellus ligula magna, ornare id scelerisque nec, rutrum ut magna. Vivamus venenatis mi sed mi rhoncus sagittis. Proin hendrerit, leo tincidunt facilisis egestas, eros est convallis dui, eu tempor nunc eros eu eros. Phasellus suscipit varius enim non ultricies. Suspendisse potenti. Ut cursus at purus sit amet aliquet. Integer posuere sit amet quam eu sagittis. Phasellus rutrum, felis vitae lobortis luctus, augue ex mattis eros, id accumsan dui risus eu nibh. Mauris molestie, leo vel iaculis accumsan, orci dui finibus ante, et cursus sem nibh eu justo. Etiam eleifend dolor in lorem vulputate fermentum. Donec fermentum dignissim ligula vitae fermentum. Aliquam scelerisque faucibus lectus et sagittis. In rhoncus arcu viverra sapien fringilla, vitae lacinia metus imperdiet.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut suscipit auctor rhoncus. Etiam semper risus sit amet ipsum gravida, ut sodales turpis scelerisque. Phasellus ligula magna, ornare id scelerisque nec, rutrum ut magna. Vivamus venenatis mi sed mi rhoncus sagittis. Proin hendrerit, leo tincidunt facilisis egestas, eros est convallis dui, eu tempor nunc eros eu eros. Phasellus suscipit varius enim non ultricies. Suspendisse potenti. Ut cursus at purus sit amet aliquet. Integer posuere sit amet quam eu sagittis. Phasellus rutrum, felis vitae lobortis luctus, augue ex mattis eros, id accumsan dui risus eu nibh. Mauris molestie, leo vel iaculis accumsan, orci dui finibus ante, et cursus sem nibh eu justo. Etiam eleifend dolor in lorem vulputate fermentum. Donec fermentum dignissim ligula vitae fermentum. Aliquam scelerisque faucibus lectus et sagittis. In rhoncus arcu viverra sapien fringilla, vitae lacinia metus imperdiet.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut suscipit auctor rhoncus. Etiam semper risus sit amet ipsum gravida, ut sodales turpis scelerisque. Phasellus ligula magna, ornare id scelerisque nec, rutrum ut magna. Vivamus venenatis mi sed mi rhoncus sagittis. Proin hendrerit, leo tincidunt facilisis egestas, eros est convallis dui, eu tempor nunc eros eu eros. Phasellus suscipit varius enim non ultricies. Suspendisse potenti. Ut cursus at purus sit amet aliquet. Integer posuere sit amet quam eu sagittis. Phasellus rutrum, felis vitae lobortis luctus, augue ex mattis eros, id accumsan dui risus eu nibh. Mauris molestie, leo vel iaculis accumsan, orci dui finibus ante, et cursus sem nibh eu justo. Etiam eleifend dolor in lorem vulputate fermentum. Donec fermentum dignissim ligula vitae fermentum. Aliquam scelerisque faucibus lectus et sagittis. In rhoncus arcu viverra sapien fringilla, vitae lacinia metus imperdiet.
+            </p>
+        </div>
+        <hr />
+    </div>
+</div>
 <div class="container">
-@using (Html.BeginForm("CreateComment", "Articles", new { idArticle = Model.Id}, FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-    <div class="col-md-8">
-        <div class="form-horizontal">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                <textarea Id="commentaire" name="Text" rows="6"> </textarea>
+    <div class="col-md-8 col-md-offset-2" id="art_commentaire">
+        <div class="col-md-12" id="event_commentaire">
+            <div class="row">
+                <span class="titre">Commentaire </span>
+            </div>
+            <div class="row">
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="user">aqw</span>
+
+                        <span class="date">20 avril 2016 21:27</span>
+                    </div>
+                </div>
+                <div class="row text_comm">
+                    <div class="col-md-12">
+                        <span>
+                            <p>
+                                aezaeazeaz
+                            </p>
+                        </span>
+                    </div>
+                </div>
+                <hr />
             </div>
 
-            <div class="form-group">
-                <a href="/Articles/Index" class="btn btn-default">Précédent</a>
-                <input type="submit" value="Créer" class="btn btn-default" />
+            <div class="row">
+                <span class="titre">Poster un commentaire </span>
+            </div>
+            <div class="row">
+@using (Html.BeginForm("CreateComment", "Articles", new { idArticle = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <textarea name="Text" id="textarea" rows="6" class="form-control">Message </textarea>
+                <input type="submit" value="Créer" class="btn btn-success col-md-12" />
+}
             </div>
         </div>
     </div>
-}
 </div>
-<script>
-    CKEDITOR.replace('Text', { customConfig: 'configcom.js' });
-</script>
