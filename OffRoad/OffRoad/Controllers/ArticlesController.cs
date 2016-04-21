@@ -48,13 +48,13 @@ namespace OffRoad.Controllers
            
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+               return View("Error");
             }
             User user = db.Users.FirstOrDefault(u => u.NickName == User.Identity.Name);
             Article article = db.Articles.Find(id);
             if (article == null)
             {
-                return HttpNotFound();
+               return View("Error");
             }
             ViewBag.Comments = artM.GetCommentairesForArticle(article.Id);
             return View(article);
@@ -106,12 +106,12 @@ namespace OffRoad.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+               return View("Error");
             }
             Article article = db.Articles.Find(id);
             if (article == null)
             {
-                return HttpNotFound();
+               return View("Error");
             }
             //Récupération de la date de création
             createDateSave = article.CreateDate;
@@ -143,12 +143,12 @@ namespace OffRoad.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+               return View("Error");
             }
             Article article = db.Articles.Find(id);
             if (article == null)
             {
-                return HttpNotFound();
+               return View("Error");
             }
             return View(article);
         }
@@ -173,7 +173,7 @@ namespace OffRoad.Controllers
             User userToSave = db.Users.Find(user.Id);
             if (user == null)
             {
-                return HttpNotFound();
+               return View("Error");
             }
             commentaires.User = userToSave;
             commentaires.CreateDate = DateTime.Now;

@@ -44,7 +44,7 @@ namespace OffRoad.Controllers
             var role = roleProvider.GetRoleForUserId(user.Id);
             if (evenement == null)
             {
-                return HttpNotFound();
+                return View("Error");
             }
             ViewBag.Role = role.Id;
             ViewBag.Comments = eventM.GetCommentairesForEvent(evenement.Id);
@@ -94,7 +94,7 @@ namespace OffRoad.Controllers
             Event evenement = db.Events.Find(id);
             if (evenement == null)
             {
-                return HttpNotFound();
+               return View("Error");
             }
 
             //Récupération de la date de création
@@ -124,7 +124,7 @@ namespace OffRoad.Controllers
     
                 db.Entry(evenement).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = evenement.Id});
             }
             return View(evenement);
         }
@@ -141,6 +141,10 @@ namespace OffRoad.Controllers
             if (evenement == null)
             {
                 return HttpNotFound();
+            }
+            else
+            {
+               return View("Error");
             }
             return View(evenement);
         }
@@ -163,7 +167,7 @@ namespace OffRoad.Controllers
                 commentaires.Event = db.Events.Find(idEvent);
             else
             {
-                return RedirectToAction("Error", "Shared");
+               return View("Error");
             }
             db.EventComment.Add(commentaires);
             db.SaveChanges();

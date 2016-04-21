@@ -22,9 +22,10 @@
             <span>Restez informé et suivez les évènements de l'association :</span>
         </div>
         <div class="col-md-1">
-            @Html.ActionLink("Nouvelle Evenements", "Create", "Events", new { @class = "btn btn-success" })
+            @Html.ActionLink("Nouvel Evenement", "Create", "Events", new { @class = "btn btn-success" })
         </div>
     </div>
+    <br />
     @foreach (var item in Model)
     {
 
@@ -59,9 +60,9 @@
                             </div>
                             @if (ViewBag.Role == 1)
                             {
-                                <div class="col-md-2">
-                                    <a href="@Url.Action("Edit", "Events", new { id = item.Id })"> <span class="glyphicon glyphicon-pencil"></span></a>
-                                </div>
+                            <div class="col-md-2">
+                                <a href="@Url.Action("Edit", "Events", new { id = item.Id })"> <span class="glyphicon glyphicon-pencil"></span></a>
+                            </div>
                             }
                         </div>
                     </div>

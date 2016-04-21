@@ -12,6 +12,8 @@
     </div>
 </div>
 
+<br />
+
 <div class="container">
     <div class="col-md-8 col-lg-offset-2" id="event_detail">
         <div class="row">
@@ -34,7 +36,7 @@
                         <span>Crée le: @Model.CreateDate.Value.ToString("dd/MM/yyyy")</span>
                     </div>
                     <div class="col-md-6">
-                        @if (Model.EditDate.Value != null)
+                        @if (Model.EditDate != null)
                         {
                             <span>Modifié le: @Model.EditDate.Value.ToString("dd/MM/yyyy")</span>
                         }
@@ -50,7 +52,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <span>@Model.Description</span>
+                    <span>@Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Description))</span>
                 </div>
             </div>
             <div class="row">

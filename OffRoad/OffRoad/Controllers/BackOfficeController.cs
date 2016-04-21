@@ -45,8 +45,9 @@ namespace OffRoad.Controllers
             Roles role = roleProvider.GetRoleForUserId(id);
             if (user == null)
             {
-                return HttpNotFound();
+               return View("Error");
             }
+
             ViewBag.Roles = db.Roles.ToList();
             ViewBag.UserRole = role.Id;
             return View(user);
@@ -74,7 +75,7 @@ namespace OffRoad.Controllers
             User user = db.Users.Find(id);
             if (user == null)
             {
-                return HttpNotFound();
+               return View("Error");
             }
             return View(user);
         }
@@ -108,6 +109,10 @@ namespace OffRoad.Controllers
             var idStringUser = Request.Form["id"];
             int idUserToModify = int.Parse(idStringUser);
             User userToModify = db.Users.Find(idUserToModify);
+            if(userToModify == null)
+            {
+               return View("Error");
+            }
             var newRoleString = Request.Form["Role"];
             int idNewRole = Int32.Parse(newRoleString);
             var requete = from b in db.UserRole
@@ -128,7 +133,7 @@ namespace OffRoad.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+               return View("Error");
             }
             else
             {
@@ -147,6 +152,10 @@ namespace OffRoad.Controllers
             var idUserString = Request.Form["id"];
             int idUser = Int32.Parse(idUserString);
             User user = db.Users.Find(idUser);
+            if(user == null)
+            {
+               return View("Error");
+            }
             var requeteRole = from b in db.UserRole
                               where b.IdUser.Id.Equals(idUser)
                               select b;

@@ -57,7 +57,10 @@ namespace OffRoad.Controllers
                 ModelState.AddModelError("LoginError", "Pseudo et/ou mot de passe incorrect(s)");
                 return View("LogIn");
             }
-
+            else
+            {
+               return View("Error");
+            }
             return View();
         }
 
@@ -119,8 +122,8 @@ namespace OffRoad.Controllers
 
                 }
                 catch 
-                {                   
-                    return View("Error");
+                {
+                   return View("Error");
                 }
             }
 
@@ -154,7 +157,7 @@ namespace OffRoad.Controllers
                 }
                 catch
                 {
-                    return View("Error");
+                   return View("Error");
                 }
             }
             else
