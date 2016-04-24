@@ -131,6 +131,7 @@
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\BackOfficeController.cs" />
+    <Compile Include="Controllers\CommentairesController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filtre\AuthorizeAdminFilter.cs" />
@@ -142,12 +143,14 @@
     <Compile Include="Methodes\ArticleMethode.cs" />
     <Compile Include="Methodes\AuthMethode.cs" />
     <Compile Include="Methodes\BackOfficeMethode.cs" />
+    <Compile Include="Methodes\CommentaireMethodes.cs" />
     <Compile Include="Methodes\EventMethode.cs" />
     <Compile Include="Methodes\MailMethode.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Avatar.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\ArticleComment.cs" />
+    <Compile Include="Models\Commentaire.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\EventComment.cs" />
     <Compile Include="Models\EventUser.cs" />
@@ -590,6 +593,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Auth\Password.cshtml" />
     <Content Include="Views\Auth\_Password.cshtml" />
+    <Content Include="Views\Commentaires\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

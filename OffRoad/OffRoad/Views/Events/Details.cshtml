@@ -119,6 +119,22 @@
                             }
 
                             <span class="date">@comment.CreateDate.ToString("dd MMMM yyyy HH:mm")</span>
+                            @if (ViewBag.Role == 1)
+                            {
+                                <a href="@Url.Action("Edit", "Commentaires", new { id = Model.Id, idCom = comment.Id, type="Evenements" })"> <span class="glyphicon glyphicon-pencil"></span></a>
+                                <a href="@Url.Action("Delete", "Commentaires", new {  id = comment.Id,type="Article" })"> <span class="glyphicon glyphicon-remove-sign"></span></a>
+                            }
+                            else
+                            {
+                                if (infoUserComment != null)
+                                {
+                                    if ((Model.Owner.Id == infoUserComment.Id))
+                                    {
+                                        <a href="@Url.Action("Edit", "Commentaires", new { id = Model.Id, idCom = comment.Id, type="Evenements" })"> <span class="glyphicon glyphicon-pencil"></span></a>
+                                        <a href="@Url.Action("Delete", "Commentaires", new {  id = comment.Id,type= "Evenements" })"> <span class="glyphicon glyphicon-remove-sign"></span></a>
+                                    }
+                                }
+                            }
                         </div>
                     </div>
                     <div class="row">

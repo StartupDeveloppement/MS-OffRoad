@@ -49,37 +49,75 @@
             <div class="row">
                 <span class="titre">Commentaire </span>
             </div>
-            <div class="row">
+            @if (ViewBag.Comments != null)
+            {
+                foreach (var comment in ViewBag.Comments)
+                {
+                    OffRoad.Models.ArticleComment com = new OffRoad.Models.ArticleComment();
+                    OffRoad.Context.DBContext db = new OffRoad.Context.DBContext();
+                    com = comment;
+                    var requeteUser = from b in db.Users
+                                      where b.Id.Equals(com.User.Id)
+                                      select b;
+                    var infoUserComment = requeteUser.FirstOrDefault();
                 <div class="row">
-                    <div class="col-md-12">
-                        <span class="user">aqw</span>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if (@infoUserComment == null)
+                            {
+                                <span class="user">Anonyme</span>
+                            }
+                            else
+                            {
+                                <span class="user">@infoUserComment.NickName</span>
+                            }
 
-                        <span class="date">20 avril 2016 21:27</span>
+                            <span class="date">@comment.CreateDate.ToString("dd MMMM yyyy HH:mm")</span>
+
+                            @if (ViewBag.Role == 1)
+                            {
+                                <a href="@Url.Action("Edit", "Commentaires", new { id = Model.Id, idCom = comment.Id, type="Article" })"> <span class="glyphicon glyphicon-pencil"></span></a>
+                                <a href="@Url.Action("Delete", "Commentaires", new {  id = comment.Id,type="Article" })"> <span class="glyphicon glyphicon-remove-sign"></span></a>
+                            }
+                            else
+                            {
+                                if (infoUserComment != null)
+                                {
+                                    if ((Model.Author.Id == infoUserComment.Id))
+                                    {
+                                        <a href="@Url.Action("Edit", "Commentaires", new { id = Model.Id, idCom = comment.Id, type="Article" })"> <span class="glyphicon glyphicon-pencil"></span></a>
+                                        <a href="@Url.Action("Delete", "Commentaires", new { id = comment.Id,type="Article" })"> <span class="glyphicon glyphicon-remove-sign"></span></a>
+                                    }
+                                }
+                            }
+                               
+                        </div>
                     </div>
-                </div>
-                <div class="row text_comm">
-                    <div class="col-md-12">
-                        <span>
-                            <p>
-                                aezaeazeaz
-                            </p>
-                        </span>
+                    <div class="row text_comm">
+                        <div class="col-md-12">
+                            <span>
+                                <p>
+                                    @Html.Raw(System.Web.HttpUtility.HtmlDecode(comment.Text))
+                                </p>
+                            </span>
+                        </div>
                     </div>
+                    <hr />
                 </div>
-                <hr />
-            </div>
+                }
+            }
 
             <div class="row">
                 <span class="titre">Poster un commentaire </span>
             </div>
             <div class="row">
-@using (Html.BeginForm("CreateComment", "Articles", new { idArticle = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <textarea name="Text" id="textarea" rows="6" class="form-control">Message </textarea>
-                <input type="submit" value="Créer" class="btn btn-success col-md-12" />
-}
+                @using (Html.BeginForm("CreateComment", "Articles", new { idArticle = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <textarea name="Text" id="textarea" rows="6" class="form-control">Message </textarea>
+                                <input type="submit" value="Créer" class="btn btn-success col-md-12" />
+                }
             </div>
         </div>
     </div>

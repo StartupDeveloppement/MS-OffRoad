@@ -52,10 +52,13 @@ namespace OffRoad.Controllers
             }
             User user = db.Users.FirstOrDefault(u => u.NickName == User.Identity.Name);
             Article article = db.Articles.Find(id);
+            var roleProvider = new OffRoad.Provider.RoleProvider();
+            var role = roleProvider.GetRoleForUserId(user.Id);
             if (article == null)
             {
                return View("Error");
             }
+            ViewBag.Role = role.Id;
             ViewBag.Comments = artM.GetCommentairesForArticle(article.Id);
             return View(article);
         }
