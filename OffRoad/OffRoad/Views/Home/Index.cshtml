@@ -1,4 +1,4 @@
-﻿ @model IEnumerable<OffRoad.Models.Article>
+﻿@model IEnumerable<OffRoad.Models.Article>
 @{
     ViewBag.Title = "Home Page";
 }
@@ -15,61 +15,95 @@
 
 <div class="container">
     <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-12">
+                <span id="titre_article">Dérnières actualitées</span>
+            </div>
+        </div>
+
         <br />
         <span id="article-title">Derniers Articles</span><br /><br />
         @foreach (var item in Model)
         {
             <div class="row">
-                <div class="col-md-1">
-                    <a href="@Url.Action("Details", "Articles", new {id = item.Id})"><img width="126" src="~/Content/Image/offroad.jpg" /></a>
+                <div class="col-md-2">
+                    <a href="@Url.Action("Details", "Articles", new {id = item.Id})">
+                        <img width="126" class="img-responsive" src="~/Content/Image/offroad.jpg" />
+                    </a>
                 </div>
-                <div class="col-md-5 col-lg-offset-1">
-                    <br />
-                    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                    <span class="article-element">@Html.DisplayFor(model => item.CreateDate)</span>
-                    <span class="glyphicon glyphicon-user"></span>
-                    <span class="article-element">@Html.DisplayFor(model => item.Author.NickName)</span>
-                    <span class="glyphicon glyphicon-comment"></span>
-                    <span class="article-element">5</span><br /><br />
-                    <span id="article-title">@Html.DisplayFor(model => item.Title)</span><br />
+                <div class="col-md-8">
+                    <div class="row">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        <span id="article_auteur">@Html.DisplayFor(model => item.Author.NickName)</span>
+                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                        <span>@Html.DisplayFor(model => item.CreateDate)</span>
+                    </div>
+                    <div class="row">
+                        <a href="@Url.Action("Details", "Articles", new {id = item.Id})">
+                            <span id="article-title">@Html.DisplayFor(model => item.Title)</span>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <span id="article-corps">EJAZOFAEOHGIZRJOLEJOFJAJOLAZJodjazfhoahfikaehvknezk,nldjflajo,    zld,z;ljflezjfojzaolf,celm</span>
+                    </div>
                 </div>
             </div>
-            <br />
         }
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4" id="menu">
         <div class="row">
-            <div class="right-side">
-                <div class="center">
-                    <span>SUIVEZ-NOUS SUR FACEBOOK</span><br /><br />
-                    <iframe src="http://www.facebook.com/plugins/likebox.php?
-                        href=http%3A%2F%2Fwww.facebook.com%2FFrancefootball.fr&amp;
-                        width=292&amp;colorscheme=light&amp;show_faces=false&amp;
-                        border_color&amp;stream=false&amp;header=false&amp;height=62"
-                            scrolling="no" frameborder="0" style="border:none; overflow:
-                        hidden;width:292px; height:62px;" allowTransparency="true"></iframe>
-                </div>
-                <br />
-                <img width="20px" src="~/Content/Image/icon-fb.png" />
-                <span style="font-size : 10px">FaceBook Social Design</span>
+            <div class="col-md-12" id="titre_memo">
+                <span>Le mémo</span>
             </div>
         </div>
         <div class="row">
-            <div class="right-side">
-                <div class="center">
-                    <span>CATEGORIES</span>
-                </div>
-                <br />
-                <div class="container">
-                    @foreach (var cat in ViewBag.Categories)
-                    {
-                        <div class="col-md-4">
-                            <a id="category" href="@Url.Action("Index","Articles", new { idCategory = cat.Id})">@cat.Label</a>
+            <div class="col-md-12">
+                <span id="article-title">Les événements OffRoad</span><br /><br />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="row">
+                        <span class="col-md-10 col-md-offset-1 memo_tire">Sortie en motos</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1 memo_descri">
+                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                            <span>25/05/2016</span>
+                            <a href="#" >Voir l'évènement</a>
                         </div>
-
-                    }
+                    </div>
                 </div>
+                <br />
+                <div class="row">
+                    <div class="row">
+                        <span class="col-md-10 col-md-offset-1 memo_tire">Sortie en motos</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1 memo_descri">
+                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                            <span>25/05/2016</span>
+                            <a href="#">Voir l'évènement</a>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="row">
+                        <span class="col-md-10 col-md-offset-1 memo_tire">Sortie en motos</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1 memo_descri">
+                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                            <span>25/05/2016</span>
+                            <a href="#">Voir l'évènement</a>
+                        </div>
+                    </div>
+                </div>
+                <br />
             </div>
         </div>
-   </div>
+
+    </div>
 </div>

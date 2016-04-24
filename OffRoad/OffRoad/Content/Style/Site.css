@@ -10,8 +10,13 @@
 }
 
 #article-title {
-    font-size: 25px;
-    font-family: Arial;
+    font-size:medium;
+    font-weight:bold;
+    color:black;
+}
+
+#article-corps{
+    color:#848383;
 }
 
 a {
@@ -117,7 +122,7 @@ textarea{
     margin-top:20px;
 }
 
-#event_commentaire .user{
+#event_commentaire .user,#article_auteur{
     color:#79b42b;
 }
 
@@ -158,4 +163,27 @@ textarea{
 
 #info_article span{
     padding-left:5px;
+}
+
+#titre_article,#titre_memo  {
+    font-size:x-large;
+    font-weight:bold;
+}
+
+#menu{
+    background-color:#f3f3f3;
+}
+
+#titre_memo{
+    text-align:center;
+}
+
+.memo_tire{
+    background-color:#7c7c7c;
+    color:white;
+    font-weight:bold;
+}
+
+.memo_descri{
+    border:solid 1px #b6b6b6;
 }
