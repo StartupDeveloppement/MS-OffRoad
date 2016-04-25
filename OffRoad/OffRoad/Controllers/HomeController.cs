@@ -14,11 +14,13 @@ namespace OffRoad.Controllers
         private MailMethode mailMethode = new MailMethode();
         private DBContext db = new DBContext();
         private ArticleMethode artM = new ArticleMethode();
+        private EventMethode eventM = new EventMethode();
 
         public ActionResult Index()
         {
             ViewBag.Categories = db.Categorys.ToList();
             List<Article> articleList = artM.GetRecentsArticles();
+            ViewBag.LastEvents = eventM.GetRecentsEvents();
             return View(articleList);
         }
 

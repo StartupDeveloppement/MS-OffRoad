@@ -34,7 +34,14 @@
                     <span class="glyphicon glyphicon-user"></span>
                     <span class="article-element">@Html.DisplayFor(model => item.Author.NickName)</span>
                     <span class="glyphicon glyphicon-comment"></span>
-                    <span class="article-element">5</span><br /><br />
+                    <span class="article-element">
+                        @{ 
+                            OffRoad.Methodes.ArticleMethode artM = new OffRoad.Methodes.ArticleMethode();
+                            var coms = artM.GetCommentairesForArticle(item.Id);
+                        }
+                        @coms.Count
+                    </span>
+                    <br /><br />
                     <span id="article-title">@Html.DisplayFor(model => item.Title)</span><br />
                 </div>
             </div>

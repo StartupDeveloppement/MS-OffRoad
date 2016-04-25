@@ -63,47 +63,25 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <div class="row">
+            @foreach (var lastEvent in ViewBag.LastEvents)
+            {
+                <div class="col-md-12">
                     <div class="row">
-                        <span class="col-md-10 col-md-offset-1 memo_tire">Sortie en motos</span>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1 memo_descri">
-                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                            <span>25/05/2016</span>
-                            <a href="#" >Voir l'évènement</a>
+                        <div class="row">
+                            <span class="col-md-10 col-md-offset-1 memo_tire">@lastEvent.Title</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1 memo_descri">
+                                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                                <span>@lastEvent.BeginDate.ToString("dd MMMM yyyy HH:mm")</span>
+                                <a href="@Url.Action("Details", "Events", new { id = lastEvent.Id})">Voir l'évènement</a>
+                            </div>
                         </div>
                     </div>
+                    <br />
                 </div>
-                <br />
-                <div class="row">
-                    <div class="row">
-                        <span class="col-md-10 col-md-offset-1 memo_tire">Sortie en motos</span>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1 memo_descri">
-                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                            <span>25/05/2016</span>
-                            <a href="#">Voir l'évènement</a>
-                        </div>
-                    </div>
-                </div>
-                <br />
-                <div class="row">
-                    <div class="row">
-                        <span class="col-md-10 col-md-offset-1 memo_tire">Sortie en motos</span>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1 memo_descri">
-                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                            <span>25/05/2016</span>
-                            <a href="#">Voir l'évènement</a>
-                        </div>
-                    </div>
-                </div>
-                <br />
-            </div>
+            }
+        <br />
         </div>
 
     </div>

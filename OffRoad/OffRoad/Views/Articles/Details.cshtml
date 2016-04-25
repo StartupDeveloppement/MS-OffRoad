@@ -23,13 +23,14 @@
         </div>
         <div class="row">
             <div class="col-md-12" id="info_article">
-                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> 12 avril 2016
+                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> @Model.CreateDate.Value
 
-                <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Philou
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span> @Model.Author.NickName
 
-                <span class=" glyphicon glyphicon-comment" aria-hidden="true"></span> 22
+                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> @ViewBag.Comments.Count
             </div>
         </div>
+        <br />
         <div class="row">
             <img src="~/Content/Image/multi-article.png" class="img-responsive img-rounded" alt="Responsive image">
         </div>
