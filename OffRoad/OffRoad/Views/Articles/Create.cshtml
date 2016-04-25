@@ -4,7 +4,6 @@
     ViewBag.Title = "Create";
 }
 
-
 <div class="container-fluid">
     <div class="row banner">
         <div class="col-md-12">
@@ -15,47 +14,54 @@
     </div>
 </div>
 
-<div class="container">
-    <div class="row">
-        <div class="form-group">
-            <div class="col-md-10">
-                <label>Titre de l'article</label>
-                <input type="text" class="form-control" placeholder="Titre de l'article">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label>Catégorie</label>
-                <select class="form-control" name="Category">
-                    @foreach (var cat in ViewBag.Categories)
-                    {
-                        <option value="@cat.Id">@cat.Label</option>
-                    }
-                </select>
-                @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label>Image</label>
-                @Html.EditorFor(model => model.PicturePath, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PicturePath, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <textarea name="Text" id="Text" rows="6" class="form-control"> </textarea>
-    </div>
-    <div class="row">
-        <div class="form-actions" id="btn_supp">
-            <input type="submit" value="Publier l'aricle" class="btn btn-success btn-lg" />
-        </div>
-    </div>
-</div>
 
+    <div class="container">
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-10">
+                    <label>Titre de l'article</label>
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @placeholder = "Titre de l'article" } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Catégorie</label>
+                    <select class="form-control" name="Category">
+                        @foreach (var cat in ViewBag.Categories)
+                        {
+                            <option value="@cat.Id">@cat.Label</option>
+                        }
+                    </select>
+                    @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Image</label>
+                    @Html.EditorFor(model => model.PicturePath, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PicturePath, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <textarea name="Text" id="Text" rows="6" class="form-control"> </textarea>
+        </div>
+        <div class="row">
+            <div class="form-actions" id="btn_supp">
+                <input type="submit" value="Publier l'aricle" class="btn btn-success btn-lg" />
+            </div>
+        </div>
+    </div>
+}
+@Html.Hidden("Author", "a")
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

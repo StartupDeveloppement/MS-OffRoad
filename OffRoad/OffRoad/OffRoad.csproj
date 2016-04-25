@@ -169,9 +169,9 @@
     <Content Include="Content\Image\Coeur.png" />
     <Content Include="Content\Image\header_connexion.png" />
     <Content Include="Content\Image\header_event.png" />
+    <Content Include="Content\Image\header_home.png" />
     <Content Include="Content\Image\header_inscription.png" />
     <Content Include="Content\Image\header_contact.png" />
-    <Content Include="Content\Image\header_home.png" />
     <Content Include="Content\Image\home.png" />
     <Content Include="Content\Image\icon-fb.png" />
     <Content Include="Content\Image\multi-article.png" />

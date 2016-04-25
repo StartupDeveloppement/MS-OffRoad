@@ -33,7 +33,7 @@ namespace OffRoad.Methodes
                                  from b in db.Articles
                                  select b
                                  )
-                                 .Take(8).OrderByDescending(b => b.CreateDate);
+                                 .Take(10).OrderByDescending(b => b.CreateDate);
             return requeteArticle.ToList<Article>();
         }
     }

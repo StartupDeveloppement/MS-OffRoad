@@ -7,7 +7,7 @@
     <div class="row banner">
         <div class="col-md-12">
             <div id="image-home">
-                <img style="width : 62%" class="img-responsive" src="~/Content/Image/home.png" />
+                <img class="img-responsive" src="~/Content/Image/header_home.png" />
             </div>
         </div>
     </div>
@@ -44,10 +44,11 @@
                         </a>
                     </div>
                     <div class="row">
-                        <span id="article-corps">EJAZOFAEOHGIZRJOLEJOFJAJOLAZJodjazfhoahfikaehvknezk,nldjflajo,    zld,z;ljflezjfojzaolf,celm</span>
+                        <span id="article-corps">@Html.DisplayFor(model => item.Text).ToString()</span>
                     </div>
                 </div>
             </div>
+            <hr />
         }
     </div>
     <div class="col-md-4" id="menu">
