@@ -44,7 +44,7 @@
             @if((ViewBag.RoleId == 1) &&(item.NickName != HttpContext.Current.User.Identity.Name) && (role.Id != 1))
             { 
                 @Html.ActionLink("Modifier", "Edit", new { Id = @item.Id })
-                @Html.ActionLink("Supprimer", "DesativeUser", new { Id = @item.Id })
+                @Html.ActionLink("Supprimer", "Desactive", new { Id = @item.Id })
             }
         </td> 
         }

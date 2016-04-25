@@ -72,6 +72,16 @@ namespace OffRoad.Controllers
                 ModelState.AddModelError("", "La date de début est supérieure à la date de fin de l'évenement");
                 return View(evenement);
             }
+            if (evenement.BeginDate < DateTime.Now)
+            {
+                ModelState.AddModelError("", "La date de début de l'evenement ne peut pas être antérieure à la date du jour");
+                return View(evenement);
+            }
+            if (evenement.EndDate < DateTime.Now)
+            {
+                ModelState.AddModelError("", "La date de fin de l'evenement ne peut pas être antérieure à la date du jour");
+                return View(evenement);
+            }
             if (ModelState.IsValid)
             {
                 evenement.Owner = user;
@@ -140,13 +150,12 @@ namespace OffRoad.Controllers
             Event evenement = db.Events.Find(id);
             if (evenement == null)
             {
-                return HttpNotFound();
+                return View("Error");
             }
             else
             {
-               return View("Error");
-            }
-            return View(evenement);
+               return View(evenement);
+            }            
         }
 
         [HttpPost]

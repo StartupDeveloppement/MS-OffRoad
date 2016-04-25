@@ -129,9 +129,9 @@ namespace OffRoad.Controllers
         }
 
         [AuthorizeAdminFilter]
-        public ActionResult DesativeUser(int id)
+        public ActionResult DesactiveUser(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                return View("Error");
             }
