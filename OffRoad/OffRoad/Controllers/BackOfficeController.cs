@@ -60,6 +60,12 @@ namespace OffRoad.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,NickName,FirstName,LastName,Email")] User user)
         {
+            User currentUser = AM.GetCurrentUser(HttpContext.User.Identity.Name);
+            Roles roleUser = roleProvider.GetRoleForUser(currentUser);
+            if(roleUser.Id != 1)
+            {
+                return View("Error");
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(user).State = EntityState.Modified;
@@ -72,8 +78,10 @@ namespace OffRoad.Controllers
         // GET: BackOffice/EditOwnAccount/5
         public ActionResult EditOwnAccount(int id)
         {
+            User currentUser = AM.GetCurrentUser(HttpContext.User.Identity.Name);
+            Roles roleUser = roleProvider.GetRoleForUser(currentUser);
             User user = db.Users.Find(id);
-            if (user == null)
+            if (user == null || currentUser.Id != user.Id)
             {
                return View("Error");
             }

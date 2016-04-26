@@ -92,7 +92,7 @@
 <div class="container">
     <div class="col-md-7 col-lg-offset-2" id="event_commentaire">
         <div class="row">
-            <span class="titre">Commentaire </span>
+            <span class="titre">Commentaires : </span>
         </div>
         @if (ViewBag.Comments != null)
         {
@@ -128,7 +128,7 @@
                             {
                                 if (infoUserComment != null)
                                 {
-                                    if ((Model.Owner.Id == infoUserComment.Id))
+                                    if ((ViewBag.UserId == infoUserComment.Id))
                                     {
                                         <a href="@Url.Action("Edit", "Commentaires", new { id = Model.Id, idCom = comment.Id, type="Evenements" })"> <span class="glyphicon glyphicon-pencil"></span></a>
                                         <a href="@Url.Action("Delete", "Commentaires", new {  id = comment.Id,type= "Evenements" })"> <span class="glyphicon glyphicon-remove-sign"></span></a>
@@ -146,23 +146,30 @@
             }
         }
 
-        <button type="button" class="btn btn-success  btn-block add_com" onclick="addcom()">Ajouter un commentaire</button>
-
-        @using (Html.BeginForm("CreateComment", "Events", new { idEvent = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @if (ViewBag.Role != 4)
         {
-            @Html.AntiForgeryToken()
-            <div class="col-md-12 ckeditor" id="cke">
-                <div class="form-horizontal">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        <textarea name="Text" id="textarea" rows="6" class="form-control"> </textarea>
-                    </div>
+            <button type="button" class="btn btn-success  btn-block add_com" onclick="addcom()">Ajouter un commentaire</button>
 
-                    <div class="form-group">
-                        <input type="submit" value="Créer" class="btn btn-default" />
+            using (Html.BeginForm("CreateComment", "Events", new { idEvent = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="col-md-12 ckeditor" id="cke">
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <textarea name="Text" id="textarea" rows="6" class="form-control"> </textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Créer" class="btn btn-default" />
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
+        }
+        else
+        {
+            <h4>Veuillez vous inscrire pour pouvoir commenter cet événement</h4>
         }
     </div>
 </div>

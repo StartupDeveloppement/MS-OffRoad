@@ -23,8 +23,6 @@ namespace OffRoad.Filtre
             }
             else
             {
-
-
                 int role = roleProvider.GetRoleForUser(user).Id;
                 if (role != 1)
                 {

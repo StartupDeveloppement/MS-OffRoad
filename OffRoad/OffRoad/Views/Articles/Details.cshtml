@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
+    var currentUser = HttpContext.Current.User.Identity;
 }
 
 <div class="container-fluid">
@@ -36,9 +37,7 @@
         </div>
         <div class="row">
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut suscipit auctor rhoncus. Etiam semper risus sit amet ipsum gravida, ut sodales turpis scelerisque. Phasellus ligula magna, ornare id scelerisque nec, rutrum ut magna. Vivamus venenatis mi sed mi rhoncus sagittis. Proin hendrerit, leo tincidunt facilisis egestas, eros est convallis dui, eu tempor nunc eros eu eros. Phasellus suscipit varius enim non ultricies. Suspendisse potenti. Ut cursus at purus sit amet aliquet. Integer posuere sit amet quam eu sagittis. Phasellus rutrum, felis vitae lobortis luctus, augue ex mattis eros, id accumsan dui risus eu nibh. Mauris molestie, leo vel iaculis accumsan, orci dui finibus ante, et cursus sem nibh eu justo. Etiam eleifend dolor in lorem vulputate fermentum. Donec fermentum dignissim ligula vitae fermentum. Aliquam scelerisque faucibus lectus et sagittis. In rhoncus arcu viverra sapien fringilla, vitae lacinia metus imperdiet.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut suscipit auctor rhoncus. Etiam semper risus sit amet ipsum gravida, ut sodales turpis scelerisque. Phasellus ligula magna, ornare id scelerisque nec, rutrum ut magna. Vivamus venenatis mi sed mi rhoncus sagittis. Proin hendrerit, leo tincidunt facilisis egestas, eros est convallis dui, eu tempor nunc eros eu eros. Phasellus suscipit varius enim non ultricies. Suspendisse potenti. Ut cursus at purus sit amet aliquet. Integer posuere sit amet quam eu sagittis. Phasellus rutrum, felis vitae lobortis luctus, augue ex mattis eros, id accumsan dui risus eu nibh. Mauris molestie, leo vel iaculis accumsan, orci dui finibus ante, et cursus sem nibh eu justo. Etiam eleifend dolor in lorem vulputate fermentum. Donec fermentum dignissim ligula vitae fermentum. Aliquam scelerisque faucibus lectus et sagittis. In rhoncus arcu viverra sapien fringilla, vitae lacinia metus imperdiet.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut suscipit auctor rhoncus. Etiam semper risus sit amet ipsum gravida, ut sodales turpis scelerisque. Phasellus ligula magna, ornare id scelerisque nec, rutrum ut magna. Vivamus venenatis mi sed mi rhoncus sagittis. Proin hendrerit, leo tincidunt facilisis egestas, eros est convallis dui, eu tempor nunc eros eu eros. Phasellus suscipit varius enim non ultricies. Suspendisse potenti. Ut cursus at purus sit amet aliquet. Integer posuere sit amet quam eu sagittis. Phasellus rutrum, felis vitae lobortis luctus, augue ex mattis eros, id accumsan dui risus eu nibh. Mauris molestie, leo vel iaculis accumsan, orci dui finibus ante, et cursus sem nibh eu justo. Etiam eleifend dolor in lorem vulputate fermentum. Donec fermentum dignissim ligula vitae fermentum. Aliquam scelerisque faucibus lectus et sagittis. In rhoncus arcu viverra sapien fringilla, vitae lacinia metus imperdiet.
+               @Model.Text
             </p>
         </div>
         <hr />
@@ -75,23 +74,26 @@
 
                             <span class="date">@comment.CreateDate.ToString("dd MMMM yyyy HH:mm")</span>
 
-                            @if (ViewBag.Role == 1)
+                            @if (ViewBag.UserId != null)
                             {
-                                <a href="@Url.Action("Edit", "Commentaires", new { id = Model.Id, idCom = comment.Id, type="Article" })"> <span class="glyphicon glyphicon-pencil"></span></a>
-                                <a href="@Url.Action("Delete", "Commentaires", new {  id = comment.Id,type="Article" })"> <span class="glyphicon glyphicon-remove-sign"></span></a>
-                            }
-                            else
-                            {
-                                if (infoUserComment != null)
+                                if (ViewBag.Role == 1)
                                 {
-                                    if ((Model.Author.Id == infoUserComment.Id))
+                                    <a href="@Url.Action("Edit", "Commentaires", new { id = Model.Id, idCom = comment.Id, type = "Article" })"> <span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a href="@Url.Action("Delete", "Commentaires", new { id = comment.Id, type = "Article" })"> <span class="glyphicon glyphicon-remove-sign"></span></a>
+                                }
+                                else
+                                {
+                                    if (infoUserComment != null)
                                     {
-                                        <a href="@Url.Action("Edit", "Commentaires", new { id = Model.Id, idCom = comment.Id, type="Article" })"> <span class="glyphicon glyphicon-pencil"></span></a>
-                                        <a href="@Url.Action("Delete", "Commentaires", new { id = comment.Id,type="Article" })"> <span class="glyphicon glyphicon-remove-sign"></span></a>
+                                        if ((ViewBag.UserId == infoUserComment.Id))
+                                        {
+                                            <a href="@Url.Action("Edit", "Commentaires", new { id = Model.Id, idCom = comment.Id, type = "Article" })"> <span class="glyphicon glyphicon-pencil"></span></a>
+                                            <a href="@Url.Action("Delete", "Commentaires", new { id = comment.Id, type = "Article" })"> <span class="glyphicon glyphicon-remove-sign"></span></a>
+                                        }
                                     }
                                 }
                             }
-                               
+
                         </div>
                     </div>
                     <div class="row text_comm">
@@ -105,19 +107,28 @@
                 </div>
                 }
             }
-
-            <div class="row">
-                <span class="titre">Poster un commentaire </span>
-            </div>
-            <div class="row">
-                @using (Html.BeginForm("CreateComment", "Articles", new { idArticle = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {
-                                @Html.AntiForgeryToken()
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                <textarea name="Text" id="textarea" rows="6" class="form-control">Message </textarea>
-                                <input type="submit" value="Créer" class="btn btn-success col-md-12" />
-                }
-            </div>
+            @if (ViewBag.UserId != null)
+            {
+                <div class="row">
+                    <span class="titre">Poster un commentaire </span>
+                </div>
+                <div class="row">
+                    @using (Html.BeginForm("CreateComment", "Articles", new { idArticle = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <textarea name="Text" id="textarea" rows="6" class="form-control">Message </textarea>
+                                    <input type="submit" value="Créer" class="btn btn-success col-md-12" />
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="row">
+                    <span class="titre">Pour poster un commentaire veuillez vous inscrire</span>
+                </div>
+            }
         </div>
     </div>
 </div>
+}

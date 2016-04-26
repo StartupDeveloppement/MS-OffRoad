@@ -20,18 +20,28 @@ namespace OffRoad.Controllers
         private static DateTime? createDateSave = DateTime.MinValue;
         private EventMethode eventM = new EventMethode();
         private AuthMethode authM = new AuthMethode();
+        private OffRoad.Provider.RoleProvider roleProvider = new OffRoad.Provider.RoleProvider();
 
         // GET: Events
+        [AllowAnonymous]
         public ActionResult Index()
         {
             User user = db.Users.FirstOrDefault(u => u.NickName == User.Identity.Name);
-            OffRoad.Provider.RoleProvider roleProvider = new OffRoad.Provider.RoleProvider();
-            Roles role = roleProvider.GetRoleForUser(user);
-            ViewBag.Role = role.Id;
+            if(user == null)
+            {
+                ViewBag.Role = 4;
+            }
+            else
+            {                
+                Roles role = roleProvider.GetRoleForUser(user);
+                ViewBag.Role = role.Id;
+            }
+           
             return View(db.Events.ToList());
         }
 
         // GET: Events/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -39,14 +49,24 @@ namespace OffRoad.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             User user = db.Users.FirstOrDefault(u => u.NickName == User.Identity.Name);
+            if(user == null)
+            {
+                ViewBag.Role = 4;
+            }
+            else
+            {
+                ViewBag.UserId = user.Id;
+                var roleProvider = new OffRoad.Provider.RoleProvider();
+                var role = roleProvider.GetRoleForUserId(user.Id);
+                ViewBag.Role = role.Id;
+            }
             Event evenement = db.Events.Find(id);
-            var roleProvider = new OffRoad.Provider.RoleProvider();
-            var role = roleProvider.GetRoleForUserId(user.Id);
+
             if (evenement == null)
             {
                 return View("Error");
             }
-            ViewBag.Role = role.Id;
+
             ViewBag.Comments = eventM.GetCommentairesForEvent(evenement.Id);
             return View(evenement);
         }

@@ -17,10 +17,18 @@ namespace OffRoad.Filtre
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
             User user = GetCurrentUser();
-            int role = roleProvider.GetRoleForUser(user).Id;
-            if (role != 1 && role != 2)
+            if (user == null)
             {
                 filterContext.Result = new ViewResult { ViewName = "~/Views/Shared/Error.cshtml" };
+            }
+            else
+            {
+
+                int role = roleProvider.GetRoleForUser(user).Id;
+                if (role != 1 && role != 2)
+                {
+                    filterContext.Result = new ViewResult { ViewName = "~/Views/Shared/Error.cshtml" };
+                }
             }
             base.OnAuthorization(filterContext);
         }

@@ -15,6 +15,17 @@
 <br />
 
 <div class="container">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions" id="btn_supp">
+            <input type="submit" value="Supprimer cet événement ?" class="btn btn-danger btn-lg" />
+        </div>
+    }
+
+    <br /><br />
+
     <div class="col-md-8 col-lg-offset-2" id="event_detail">
         <div class="row">
             <div class="col-md-1 date">
@@ -81,14 +92,7 @@
             </div>
         </div>
 
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="form-actions" id="btn_supp">
-                <input type="submit" value="Supprimer cet évènement" class="btn btn-danger btn-lg" />  
-            </div>
-        }
+      
     </div>
 </div>
 

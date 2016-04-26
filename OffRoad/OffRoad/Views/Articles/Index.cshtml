@@ -46,8 +46,14 @@
                 </div>
             </div>
             <br />
-            @Html.ActionLink("Modifier", "Edit", "Articles", new { id = item.Id }, new { @class = "btn btn-success" })
-            @Html.ActionLink("Supprimer", "Delete", "Articles", new { id = item.Id }, new { @class = "btn btn-danger" })
+            if (ViewBag.Role == 2 || ViewBag.Role == 1)
+            {
+                @Html.ActionLink("Modifier", "Edit", "Articles", new { id = item.Id }, new { @class = "btn btn-success" })
+            }
+            if (ViewBag.Role == 1)
+            {
+                @Html.ActionLink("Supprimer", "Delete", "Articles", new { id = item.Id }, new { @class = "btn btn-danger" })
+            }
             <hr />
         }
     </div>

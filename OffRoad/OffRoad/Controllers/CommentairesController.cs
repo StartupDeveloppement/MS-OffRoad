@@ -21,45 +21,62 @@ namespace OffRoad.Controllers
         // GET: Commentaires
         public ActionResult Edit(int id, int idCom, string type)
         {
-            if (type == null || id == 0 || idCom == 0)
+            User user = db.Users.FirstOrDefault(u => u.NickName == User.Identity.Name);
+            if (user == null)
             {
                 return View("Error");
             }
-            if (type == "Evenements")
-            {
-                EventComment mod = new EventComment();
-                var evenement = db.Events.Find(id);
-                if (evenement == null)
-                {
-                    return View("Error");
-                }
-                mod = comM.GetCommentaireForEvent(idCom,db);
-                Commentaire com = new Commentaire();
-                com.CreateDate = mod.CreateDate;
-                com.Text = mod.Text;
-                com.IdUser = mod.User.Id;
-                com.IdCommentaire = mod.Id;
-                com.IdType = mod.Event.Id;
-                com.Type = "Evenements";
-                return View(com);
-            }
             else
             {
-                ArticleComment mod = new ArticleComment();
-                var article = db.Articles.Find(id);
-                if (article == null)
+                if (type == null || id == 0 || idCom == 0)
                 {
                     return View("Error");
                 }
-                mod = comM.GetCommentaireForArticle(idCom,db);
-                Commentaire com = new Commentaire();
-                com.CreateDate = mod.CreateDate;
-                com.Text = mod.Text;
-                com.IdUser = mod.User.Id;
-                com.IdCommentaire = mod.Id;
-                com.IdType = mod.Article.Id;
-                com.Type = "Article";
-                return View(com);
+                if (type == "Evenements")
+                {
+                    EventComment mod = new EventComment();
+                    var evenement = db.Events.Find(id);
+                    if (evenement == null)
+                    {
+                        return View("Error");
+                    }
+                    mod = comM.GetCommentaireForEvent(idCom, db);
+                    var roleProvider = new OffRoad.Provider.RoleProvider();
+                    var role = roleProvider.GetRoleForUserId(user.Id);
+                    if (role.Id == 1 || mod.User.Id == user.Id)
+                    {
+                        Commentaire com = new Commentaire();
+                        com.CreateDate = mod.CreateDate;
+                        com.Text = mod.Text;
+                        com.IdUser = mod.User.Id;
+                        com.IdCommentaire = mod.Id;
+                        com.IdType = mod.Event.Id;
+                        com.Type = "Evenements";
+                        return View(com);
+                    }
+                    else
+                    {
+                        return View("Error");
+                    }
+                }
+                else
+                {
+                    ArticleComment mod = new ArticleComment();
+                    var article = db.Articles.Find(id);
+                    if (article == null)
+                    {
+                        return View("Error");
+                    }
+                    mod = comM.GetCommentaireForArticle(idCom, db);
+                    Commentaire com = new Commentaire();
+                    com.CreateDate = mod.CreateDate;
+                    com.Text = mod.Text;
+                    com.IdUser = mod.User.Id;
+                    com.IdCommentaire = mod.Id;
+                    com.IdType = mod.Article.Id;
+                    com.Type = "Article";
+                    return View(com);
+                }
             }
         }
 

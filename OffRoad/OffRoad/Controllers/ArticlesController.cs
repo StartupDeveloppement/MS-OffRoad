@@ -20,11 +20,23 @@ namespace OffRoad.Controllers
         private static DateTime? createDateSave = DateTime.MinValue;
         private AuthMethode authM = new AuthMethode();
         private ArticleMethode artM = new ArticleMethode();
+        private OffRoad.Provider.RoleProvider roleProvider = new OffRoad.Provider.RoleProvider();
 
+        [AllowAnonymous]
         // GET: Articles
         public ActionResult Index(int? idCategory)
         {
             ViewBag.Categories = db.Categorys.ToList();
+            User user = db.Users.FirstOrDefault(u => u.NickName == HttpContext.User.Identity.Name);
+            if(user == null)
+            {
+                ViewBag.Role = 4;
+            }
+            else
+            {
+                var role = roleProvider.GetRoleForUserId(user.Id);
+                ViewBag.Role = role.Id;
+            }
             if (idCategory != null)
             {
                 Category category = db.Categorys.Find(idCategory);
@@ -42,6 +54,7 @@ namespace OffRoad.Controllers
             return View(db.Articles.ToList());
         }
 
+        [AllowAnonymous]
         // GET: Articles/Details/5
         public ActionResult Details(int? id)
         {
@@ -50,16 +63,21 @@ namespace OffRoad.Controllers
             {
                return View("Error");
             }
-            User user = db.Users.FirstOrDefault(u => u.NickName == User.Identity.Name);
             Article article = db.Articles.Find(id);
-            var roleProvider = new OffRoad.Provider.RoleProvider();
-            var role = roleProvider.GetRoleForUserId(user.Id);
             if (article == null)
             {
-               return View("Error");
+                return View("Error");
             }
-            ViewBag.Role = role.Id;
             ViewBag.Comments = artM.GetCommentairesForArticle(article.Id);
+            User user = db.Users.FirstOrDefault(u => u.NickName == User.Identity.Name);
+            if(user == null)
+            {
+                ViewBag.Role = 4;
+                return View(article);
+            }
+            var role = roleProvider.GetRoleForUserId(user.Id);
+            ViewBag.UserId = user.Id;
+            ViewBag.Role = role.Id;
             return View(article);
         }
 
@@ -118,7 +136,7 @@ namespace OffRoad.Controllers
             }
             //Récupération de la date de création
             createDateSave = article.CreateDate;
-
+           
             return View(article);
         }
 
@@ -140,7 +158,7 @@ namespace OffRoad.Controllers
             return View(article);
         }
 
-        [AuthorizeRedacFilter]
+        [AuthorizeAdminFilter]
         // GET: Articles/Delete/5
         public ActionResult Delete(int? id)
         {

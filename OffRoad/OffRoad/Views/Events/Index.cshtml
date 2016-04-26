@@ -21,9 +21,12 @@
         <div class="col-md-6 col-md-offset-2">
             <span>Restez informé et suivez les évènements de l'association :</span>
         </div>
-        <div class="col-md-1">
-            @Html.ActionLink("Nouvel Evenement", "Create", "Events", new { @class = "btn btn-success" })
-        </div>
+        @if(ViewBag.Role == 1 || ViewBag.Role == 2)
+        {
+            <div class="col-md-1">
+                @Html.ActionLink("Nouvel Evenement", "Create", "Events", new { @class = "btn btn-success" })
+            </div>
+        }
     </div>
     <br />
     @foreach (var item in Model)
@@ -75,7 +78,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-10 col-md-offset-1">
-                            <p>@item.Description</p>
+                            <p>@Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Description))</p>
                         </div>
                     </div>
                 </div>
