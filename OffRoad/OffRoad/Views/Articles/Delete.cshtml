@@ -1,0 +1,41 @@
+﻿@model OffRoad.Models.Article
+
+@{
+    ViewBag.Title = "Delete";
+}
+<br />
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions" id="btn_supp">
+            <input type="submit" value="Supprimer cet article ?" class="btn btn-danger btn-lg" />
+        </div>
+    }
+    <div class="col-md-8 col-md-offset-2">
+        <div class="row">
+            <div class="col-md-12">
+                <span id="titre">@Html.DisplayFor(model => model.Title)</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" id="info_article">
+                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> @Html.DisplayFor(model => model.CreateDate)
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span> @Html.DisplayFor(model => model.Author.NickName)
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <img src="~/Content/Image/multi-article.png" class="img-responsive img-rounded" alt="Responsive image">
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                    @Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Text))
+
+            </div>
+        </div>
+        <hr />
+    </div>
+</div>

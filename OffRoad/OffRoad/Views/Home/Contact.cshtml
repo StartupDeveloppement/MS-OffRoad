@@ -1,0 +1,75 @@
+﻿@model OffRoad.Models.Email
+@{
+    ViewBag.Title = "Contact";
+}
+
+<div class="container-fluid">
+    <div class="row banner">
+        <div class="col-md-12">
+            <img class="img-responsive" src="~/Content/Image/header_contact.png" />
+        </div>
+    </div>
+</div>
+
+<div class="container body-content center-">
+    <div class="row">
+        <div class="col-md-4 marge-info">
+            <h3>Rendez-nous visite</h3>
+            <br />
+            <h4>Adresse</h4>  
+            <span>22 Rue des accacias</span>
+            <br />
+            <span>60212</span>
+            <br />
+            <span>Corbehem</span> 
+            <br /><br />     
+            <h4>Email</h4>
+            <span>offroadbiketeam@hotmail.fr</span> 
+            <br /><br />
+            <h4>Téléphone</h4>
+            <span>06 37 78 70 15</span> 
+        </div>
+        <div class="col-md-6">
+            <h3>Quelque chose à nous dire ?</h3>
+            <br />
+            @using (Html.BeginForm("SendEmail", "Home", FormMethod.Post, null))
+            {
+            <div class="row">
+                <div class="col-md-6 form-group">                
+                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Prénom" } })
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6 form-group">
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nom" } })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    @Html.EditorFor(model => model.Mail, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+                    @Html.ValidationMessageFor(model => model.Mail, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6 form-group">
+                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Téléphone" } })
+                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.TextAreaFor(model => model.Message, new { @class = "form-control textarea", @rows = "6", @placeholder = "Message" })
+                    @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <button class="btn btn-success" type="submit">Envoyer le Mail</button>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <h3>Plan d'accès</h3>
+            <iframe class="col-md-12" height="300" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d20373.254736985906!2d3.030549446994956!3d50.33565312801259!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c2ca3be0786971%3A0x40af13e8163f630!2sCorbehem!5e0!3m2!1sfr!2sfr!4v1453903591576" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

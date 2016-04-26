@@ -1,0 +1,87 @@
+﻿@model IEnumerable<OffRoad.Models.Article>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container-fluid">
+    <div class="row banner">
+        <div class="col-md-12">
+            <div id="image-home">
+                <img class="img-responsive" src="~/Content/Image/multi-article.png" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="row">
+            <div class="col-md-8">
+                <span>Restez informé et suivez les articles de l'association :</span>
+            </div>
+            @if (ViewBag.Role == 1 || ViewBag.Role == 2)
+            {
+                <div class="col-md-1">
+                    @Html.ActionLink("Nouvelle article", "Create", "Articles", new { @class = "btn btn-success" })
+                </div>
+            }
+        </div>
+@foreach (var item in Model)
+{
+    <br />
+        <div class="row">
+            <div class="block-event">
+                <div class="row">
+                    <div class="col-md-2">
+                        <a href="@Url.Action("Details", "Articles", new {id = item.Id})"><img class="img-responsive" src="~/Content/Image/offroad.jpg" /></a>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-md-12 article_info">
+                                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                                @Html.DisplayFor(model => item.CreateDate)
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                @Html.DisplayFor(model => item.Author.NickName)
+                                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                                @{
+                                    OffRoad.Methodes.ArticleMethode artM = new OffRoad.Methodes.ArticleMethode();
+                                    var coms = artM.GetCommentairesForArticle(item.Id);
+                                }
+                                @coms.Count
+                            </div>
+                        </div>
+                        <div class="row titre_art">
+                            <a href="@Url.Action("Details", "Articles", new {id = item.Id})">
+                                <span class="col-md-12 title_article">@Html.DisplayFor(model => item.Title)</span>                      
+                            </a>
+                        </div>
+                        <div class="row art_corps">
+                            <span class="col-md-12">
+                                @if (item.Text.Length > 100)
+                                {
+                                    @Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Text.Substring(0, 100)+" ..."))
+                                }
+                                else
+                                {
+                                    @Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Text))
+                                }
+                            </span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="@Url.Action("Details", "Articles", new {id = item.Id})">Lire la suite</a>
+                                @if (ViewBag.Role == 1)
+                                {
+                                    <a href="@Url.Action("Edit", "Articles", new {id = item.Id})"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                                    <a href="@Url.Action("Delete", "Articles", new {id = item.Id})"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+}
+    </div>
+</div>

@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Mon Compte";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" id="marge">
+    <h3>Gestion de votre compte</h3>
+    <br />
+    @using (Html.BeginForm("SaveRole", "LandingPagesConnect", FormMethod.Post, new { @class = "form-inline" }))
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    Nom
+                </th>
+                <th>
+                    Prénom
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                </th>
+                <th>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    @ViewBag.CurrentUser.LastName
+                </td>
+                <td>
+                    @ViewBag.CurrentUser.FirstName
+                </td>
+                <td>
+                    @ViewBag.CurrentUser.Email
+                </td>
+                <td>
+                    @Html.ActionLink("Modifier", "EditOwnAccount", new { Id = @ViewBag.CurrentUser.Id })
+                </td>
+                <td>
+                    @Html.ActionLink("Supprimer", "Desactive", new { Id = @ViewBag.CurrentUser.Id })
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+
+

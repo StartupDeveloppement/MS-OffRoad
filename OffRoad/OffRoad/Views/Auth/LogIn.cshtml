@@ -1,0 +1,53 @@
+﻿@model OffRoad.Models.LogIn
+
+@{
+    ViewBag.Title = "LogIn";
+}
+<div class="container-fluid">
+    <div class="row banner">
+        <div class="col-md-12">
+            <img src="~/Content/Image/header_connexion.png" class="img-responsive"/>
+        </div>
+    </div>
+</div>
+
+<div class="container body-content">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="connexion col-md-4 col-lg-offset-1">
+                <h4>Connectez-vous à votre espace!</h4>
+                @Html.ValidationMessage("LoginError","", new { @class = "danger"  })
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
+                        @Html.EditorFor(model => model.NickName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Pseudo" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.NickName, "", new { @class = "text-danger" })
+                    <br />
+                    <div class="input-group">
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></div>
+                        @Html.EditorFor(model => model.PassWord, new { htmlAttributes = new { @class = "form-control", @type = "password", @placeholder = "Mot de passe" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })
+                </div>
+                <input type="submit" class="btn btn-success" value="Se connecter" id="btn_connexion" />
+                <br />
+                @Html.ActionLink("Mot de passe oublié?", "Password", null, null)
+            </div>
+            <div class="inscription col-md-4 col-lg-offset-1">
+                <h3>Vous étes un nouvelle utilisateur?</h3>
+                <h4>Créez votre compte!</h4>
+                <p>Je ne suis pas encore membre et je souhaite rejoinde la Offroad Bike Team</p>
+                @Html.ActionLink("Créer un compte", "Register", null, new { @class = "btn btn-info" })
+            </div>
+        </div>       
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

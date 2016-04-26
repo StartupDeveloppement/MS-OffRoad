@@ -1,0 +1,78 @@
+﻿#page{
+    min-height:calc(100vh - 60px);
+}
+
+#logo{
+    position: fixed;
+    width : 113px;
+    height: 90px;
+}
+
+.marge-info{
+    margin-bottom : 40px;
+}
+.textarea{
+    min-width: 100%;
+}
+.icon{
+    width:20px;
+    height:20px;
+}
+
+a{
+    font-family:Myriad Pro;
+    font-weight:bold;
+}
+
+a:hover{
+    color:green !important;
+}
+
+footer{
+    background-color:#222222;
+    color:white;
+}
+
+footer label{
+    padding:10px 0px;
+    font-size:26px;
+    font-family:Arial;
+}
+
+.banner{
+    background-color:black;
+}
+
+.banner div img,#btn_inscrit{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#btn_connexion{
+    width:100%;
+}
+
+.inscription{
+    text-align:center;
+}
+
+.inscription_form div input{
+    margin-bottom:10px;
+}
+
+.italique {
+    font-style:italic;
+}
+
+#inscription_info{
+    margin-bottom:20px;
+}
+
+#inscription_erreur,.danger{
+    color:red;
+}
+
+#btn_inscrit{
+    width:100%;
+}

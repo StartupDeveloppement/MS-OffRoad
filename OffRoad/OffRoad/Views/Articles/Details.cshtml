@@ -1,0 +1,134 @@
+﻿@model OffRoad.Models.Article
+
+@{
+    ViewBag.Title = "Details";
+    var currentUser = HttpContext.Current.User.Identity;
+}
+
+<div class="container-fluid">
+    <div class="row banner">
+        <div class="col-md-12">
+            <div id="image-home">
+                <img class="img-responsive" src="~/Content/Image/banniere-article.png" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="row">
+            <div class="col-md-12">
+                <span id="titre">@Model.Title</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" id="info_article">
+                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> @Model.CreateDate.Value
+
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span> @Model.Author.NickName
+
+                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> @ViewBag.Comments.Count
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <img src="~/Content/Image/multi-article.png" class="img-responsive img-rounded" alt="Responsive image">
+        </div>
+        <div class="row">
+            <p>
+               @Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Text))
+            </p>
+        </div>
+        <hr />
+    </div>
+</div>
+<div class="container">
+    <div class="col-md-8 col-md-offset-2" id="art_commentaire">
+        <div class="col-md-12" id="event_commentaire">
+            <div class="row">
+                <span class="titre">Commentaire </span>
+            </div>
+            @if (ViewBag.Comments != null)
+            {
+                foreach (var comment in ViewBag.Comments)
+                {
+                    OffRoad.Models.ArticleComment com = new OffRoad.Models.ArticleComment();
+                    OffRoad.Context.DBContext db = new OffRoad.Context.DBContext();
+                    com = comment;
+                    var requeteUser = from b in db.Users
+                                      where b.Id.Equals(com.User.Id)
+                                      select b;
+                    var infoUserComment = requeteUser.FirstOrDefault();
+                <div class="row">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if (@infoUserComment == null)
+                            {
+                                <span class="user">Anonyme</span>
+                            }
+                            else
+                            {
+                                <span class="user">@infoUserComment.NickName</span>
+                            }
+
+                            <span class="date">@comment.CreateDate.ToString("dd MMMM yyyy HH:mm")</span>
+
+                            @if (ViewBag.UserId != null)
+                            {
+                                if (ViewBag.Role == 1)
+                                {
+                                    <a href="@Url.Action("Edit", "Commentaires", new { id = Model.Id, idCom = comment.Id, type = "Article" })"> <span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a href="@Url.Action("Delete", "Commentaires", new { id = comment.Id, type = "Article" })"> <span class="glyphicon glyphicon-remove-sign"></span></a>
+                                }
+                                else
+                                {
+                                    if (infoUserComment != null)
+                                    {
+                                        if ((ViewBag.UserId == infoUserComment.Id))
+                                        {
+                                            <a href="@Url.Action("Edit", "Commentaires", new { id = Model.Id, idCom = comment.Id, type = "Article" })"> <span class="glyphicon glyphicon-pencil"></span></a>
+                                            <a href="@Url.Action("Delete", "Commentaires", new { id = comment.Id, type = "Article" })"> <span class="glyphicon glyphicon-remove-sign"></span></a>
+                                        }
+                                    }
+                                }
+                            }
+
+                        </div>
+                    </div>
+                    <div class="row text_comm">
+                        <div class="col-md-12">
+                            <p>
+                                @Html.Raw(System.Web.HttpUtility.HtmlDecode(comment.Text))
+                            </p>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+                }
+            }
+            @if (ViewBag.UserId != null)
+            {
+                <div class="row">
+                    <span class="titre">Poster un commentaire </span>
+                </div>
+                <div class="row">
+                    @using (Html.BeginForm("CreateComment", "Articles", new { idArticle = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <textarea name="Text" id="textarea" rows="6" class="form-control"></textarea>
+                                    <input type="submit" value="Créer" class="btn btn-success col-md-12" />
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="row">
+                    <span class="titre">Pour poster un commentaire veuillez vous inscrire</span>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+}

@@ -1,0 +1,139 @@
+﻿@{
+    var currentUser = HttpContext.Current.User.Identity.Name;
+    OffRoad.Models.User userObject = null;
+    if (currentUser != null)
+    {
+        OffRoad.Methodes.AuthMethode authM = new OffRoad.Methodes.AuthMethode();
+        userObject = authM.GetCurrentUser(currentUser);
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mon application ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/datepicker")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/moment")
+    @Scripts.Render("~/bundles/datepicker")
+    <script type="text/javascript" src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript" src="~/Scripts/ckeditor/ckeditor.js"></script>    
+    <script type="text/javascript" src="~/Scripts/ckeditor/adapters/jquery.js"></script>
+</head>
+<body>
+    <div id="page">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="col-md-5">
+                    <a href='@Url.Action("Index", "Home")'>
+                        <img src="~/Content/Image/Logo.png" id="logo"  />
+                    </a>
+                </div>              
+            </div>
+            <div class="navbar-collapse collapse navbar-right" >
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href='@Url.Action("Index", "Articles")'>
+                            <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> 
+                            ARTICLES
+                        </a>
+                    </li>
+                    <li>
+                        <a href='@Url.Action("Index", "Events")'>
+                            <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> 
+                            EVENEMENTS
+                        </a>
+                    </li>
+        <!--         <li>
+                        <a href='#'>
+                            <span class="glyphicon glyphicon-camera" aria-hidden="true"></span> 
+                            GALLERIES
+                        </a>
+                    </li>-->
+                    @if (currentUser != "")
+                    {
+                    <li>
+                        <a href='@Url.Action("Index", "BackOffice")'>
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 
+                            UTILISATEURS
+                        </a>
+                    </li>
+                    <li>
+                        <a href='@Url.Action("EditOwnAccount", "BackOffice", new { id = userObject.Id})'>
+                            <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> 
+                            MON COMPTE
+                        </a>
+                    </li>
+                    <li>
+                        <a href='@Url.Action("LogOut", "Auth")'>
+                            <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> 
+                            DECONNEXION
+                        </a>
+                    </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a href='@Url.Action("LogIn", "Auth")'>
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 
+                                CONNEXION
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+        @RenderBody()
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="col-md-4">
+                <label>A PROPOS DE NOUS</label>
+                <p>
+                    L'association OffRoad créée en 2012 regroupe des passionnés de Moto depuis toujours. Dans un esprit de convivialité et de bonne humeur, ses membres ouvrent leur porte à tous les motards qui souhaitent les rejoindres pour des balades , des salons ou tout autres types d'événements.
+                </p>
+            </div>
+            <div class="col-md-4">
+                <label>LIENS UTILES</label>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div>@Html.ActionLink("Accueil", "Index", new { Controller = "Home" }, null)</div>
+                        <div>@Html.ActionLink("Article", "Index", new { Controller = "Articles" }, null)</div>
+                        <div>@Html.ActionLink("Evenements", "Index", new { Controller = "Events" }, null)</div>
+                    </div>
+                    <div class="col-md-4">
+                        <div><a href="https://www.twitter.com">Twitter</a></div>
+                        <div><a href="https://www.facebook.com/offroadbiketeam62112">Facebook</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label>NOUS CONTACTER</label>
+                <p>
+                    Pour nous contacter, vous pouvez passer par notre page <a href="https://www.facebook.com/offroadbiketeam62112">Facebook</a> ou <a href="https://www.twitter.com">Twitter</a>,
+                    ou passer par @Html.ActionLink("ici", "Contact", new { Controller = "Home/Contact" }, null).
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    @RenderSection("CreateEvent", required: false)
+
+</body>
+</html>
