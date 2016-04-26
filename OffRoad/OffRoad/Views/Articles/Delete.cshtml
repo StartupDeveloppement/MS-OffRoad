@@ -30,9 +30,11 @@
             <img src="~/Content/Image/multi-article.png" class="img-responsive img-rounded" alt="Responsive image">
         </div>
         <div class="row">
-            <p>
-                @Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Text))
-            </p>
+            <div class="col-md-12">
+
+                    @Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Text))
+
+            </div>
         </div>
         <hr />
     </div>
