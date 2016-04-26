@@ -15,80 +15,50 @@
 </div>
 
 <div class="container">
+    <div class="col-md-8 col-md-offset-2">
+@foreach (var item in Model)
+{
     <br />
-    @if (ViewBag.Category != null)
-    {
-        <span id="article-title">Categorie : @ViewBag.Category</span><br/><hr />
-    }
-    <div class="col-md-8">
-        @foreach (var item in Model)
-        {
-            <div class="row">
-                <div class="col-md-1">
-                    <a href="@Url.Action("Details", "Articles", new {id = item.Id})"><img width="126" src="~/Content/Image/offroad.jpg" /></a>
-                </div>
-                <div class="col-md-5 col-lg-offset-1">
-                    <br />
-                    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                    <span class="article-element">@Html.DisplayFor(model => item.CreateDate)</span>
-                    <span class="glyphicon glyphicon-user"></span>
-                    <span class="article-element">@Html.DisplayFor(model => item.Author.NickName)</span>
-                    <span class="glyphicon glyphicon-comment"></span>
-                    <span class="article-element">
-                        @{ 
-                            OffRoad.Methodes.ArticleMethode artM = new OffRoad.Methodes.ArticleMethode();
-                            var coms = artM.GetCommentairesForArticle(item.Id);
-                        }
-                        @coms.Count
-                    </span>
-                    <br /><br />
-                    <span id="article-title">@Html.DisplayFor(model => item.Title)</span><br />
-                </div>
-            </div>
-            <br />
-            if (ViewBag.Role == 2 || ViewBag.Role == 1)
-            {
-                @Html.ActionLink("Modifier", "Edit", "Articles", new { id = item.Id }, new { @class = "btn btn-success" })
-            }
-            if (ViewBag.Role == 1)
-            {
-                @Html.ActionLink("Supprimer", "Delete", "Articles", new { id = item.Id }, new { @class = "btn btn-danger" })
-            }
-            <hr />
-        }
-    </div>
-    <div class="col-md-4">  
         <div class="row">
-            <div class="right-side">
-                <div class="center">
-                    <span>SUIVEZ-NOUS SUR FACEBOOK</span><br /><br />
-                    <iframe src="http://www.facebook.com/plugins/likebox.php?
-                        href=http%3A%2F%2Fwww.facebook.com%2FFrancefootball.fr&amp;
-                        width=292&amp;colorscheme=light&amp;show_faces=false&amp;
-                        border_color&amp;stream=false&amp;header=false&amp;height=62"
-                            scrolling="no" frameborder="0" style="border:none; overflow:
-                        hidden;width:292px; height:62px;" allowTransparency="true"></iframe>
-                </div>
-                <br />
-                <img width="20px" src="~/Content/Image/icon-fb.png" />
-                <span style="font-size : 10px">FaceBook Social Design</span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="right-side">
-                <div class="center">
-                    <span>CATEGORIES</span>
-                </div>
-                <br />
-                <div class="container">
-                    @foreach (var cat in ViewBag.Categories)
-                    {
-                        <div class="col-md-4">
-                            <a id="category" href="@Url.Action("Index","Articles", new { idCategory = cat.Id})">@cat.Label</a>
-                        </div >
-                    }
+            <div class="block-event">
+                <div class="row">
+                    <div class="col-md-2">
+                        <a href="@Url.Action("Details", "Articles", new {id = item.Id})"><img class="img-responsive" src="~/Content/Image/offroad.jpg" /></a>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-md-12 article_info">
+                                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                                @Html.DisplayFor(model => item.CreateDate)
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                @Html.DisplayFor(model => item.Author.NickName)
+                                <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                                @{
+                                    OffRoad.Methodes.ArticleMethode artM = new OffRoad.Methodes.ArticleMethode();
+                                    var coms = artM.GetCommentairesForArticle(item.Id);
+                                }
+                                @coms.Count
+                            </div>
+                        </div>
+                        <div class="row titre_art">
+                            <a href="@Url.Action("Details", "Articles", new {id = item.Id})"><span class="col-md-12 title_article">@Html.DisplayFor(model => item.Title)</span></a>
+                        </div>
+                        <div class="row art_corps">
+                            <span class="col-md-12">@Html.DisplayFor(model => item.Text)</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="@Url.Action("Details", "Articles", new {id = item.Id})">Lire la suite</a>
+                                @if (ViewBag.Role == 1)
+                                {
+                                <a href="@Url.Action("Delete", "Articles", new {id = item.Id})"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                                }
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+}
     </div>
 </div>

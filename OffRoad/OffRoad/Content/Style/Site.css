@@ -165,7 +165,7 @@ textarea{
     padding-left:5px;
 }
 
-#titre_article,#titre_memo  {
+#titre_article,#titre_memo,.titre_art  {
     font-size:x-large;
     font-weight:bold;
 }
@@ -186,4 +186,14 @@ textarea{
 
 .memo_descri{
     border:solid 1px #b6b6b6;
+}
+
+.title_article{
+    font-size:x-large;
+    font-weight:bold;
+    color:black;
+}
+
+.article_info{
+    border-bottom:dotted 1px #F1F1F1;
 }
