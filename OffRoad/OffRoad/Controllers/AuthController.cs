@@ -117,8 +117,8 @@ namespace OffRoad.Controllers
                     User newuser = AM.AjouterUtilisateur(user.LastName, user.FirstName, user.Password, user.Email, user.NickName);
                     UserRole userrole = new UserRole { IdUser = newuser, Roles = db.Roles.Find(1) };
                     string message =  "Bonjour "+newuser.NickName+",<br/> Vous venez de vous inscrire au site web de l'association OffRoad. <br/> Vous pouvez vous connecter à notre application via le lien suivant : http://offroad.com. <br/> Pour vous connecter il vous suffit d'utiliser votre adresse mail '"+newuser.Email+"' et votre mot de passe <br/> Si vous avez des questions, n'hesitez pas à nous contacter par mail à l'adresse suivante : <br/> offraoddev@gmail.com <br/><br/> Cordialement <br/> Equipe OffRoad";
-                    MailM.SendMail(newuser.Email, register, message);
-
+                    //MailM.SendMail(newuser.Email, register, message);
+                    return RedirectToAction("Index", "Home");
                 }
                 catch 
                 {

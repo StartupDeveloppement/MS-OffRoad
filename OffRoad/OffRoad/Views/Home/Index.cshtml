@@ -19,7 +19,7 @@
     <div class="col-md-8">
         <div class="row">
             <div class="col-md-12">
-                <span id="titre_article">Dérnières actualitées</span>
+                <span id="titre_article">Dernières Actualités</span>
             </div>
         </div>
 
@@ -48,11 +48,11 @@
                     <div class="row">
                         @if (item.Text.Length > 100)
                         {
-                            <span id="article-corps">@Html.DisplayFor(model => item.Text).ToString().Substring(0,100) ...</span>
+                            @Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Text.Substring(0, 100) + " ..."))
                         }
                         else
                         {
-                            <span id="article-corps">@Html.DisplayFor(model => item.Text).ToString()</span>
+                            @Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Text))
                         }
                     </div>
                 </div>

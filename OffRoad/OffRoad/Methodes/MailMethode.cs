@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Net.Mail;
+using System.Net;
 
 namespace OffRoad.Methodes
 {
@@ -10,21 +11,36 @@ namespace OffRoad.Methodes
     {
         public void SendMail(string to, string subject, string body)
         {
-            MailMessage mail = new MailMessage();
-            mail.To.Add(to);
-            mail.From = new MailAddress("offroad@vilaine.fr");
-            mail.Subject = subject;
-            string Body = body;
-            mail.Body = Body;
-            mail.IsBodyHtml = true;
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = "smtp.vilaine.com";
-            smtp.Port = 25;
-            smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new System.Net.NetworkCredential ("offroad@vilaine.fr", "offroad2016");
-            // Enter seders User name and password 
-            smtp.EnableSsl = false;
-            smtp.Send(mail); 
+            SmtpClient smtpClient = new SmtpClient();
+
+            NetworkCredential basicCredential = new NetworkCredential("offroad@vilaine.fr", "offroad2016");
+
+            MailMessage message = new MailMessage();
+
+            MailAddress fromAddress = new MailAddress("offroad@vilaine.fr");
+
+            smtpClient.Host ="smtp.vilaine.com";
+
+            smtpClient.Port = 25;
+
+            smtpClient.UseDefaultCredentials = false;
+
+            smtpClient.Credentials = basicCredential;
+
+            message.From = fromAddress;
+
+            message.Subject = subject;
+
+            message.IsBodyHtml = true;
+
+            message.Body = body;
+
+            message.To.Add(to);
+
+            smtpClient.EnableSsl = false;
+
+            smtpClient.Send(message);
+                
         }
     }
 }
