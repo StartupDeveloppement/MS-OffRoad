@@ -10,7 +10,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions" id="btn_supp">
-            <input type="submit" value="Supprimer cet événement ?" class="btn btn-danger btn-lg" />
+            <input type="submit" value="Supprimer cet article ?" class="btn btn-danger btn-lg" />
         </div>
     }
     <div class="col-md-8 col-md-offset-2">
@@ -31,7 +31,7 @@
         </div>
         <div class="row">
             <p>
-                @Html.DisplayFor(model => model.Text)
+                @Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Text))
             </p>
         </div>
         <hr />

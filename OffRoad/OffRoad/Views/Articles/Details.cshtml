@@ -37,7 +37,7 @@
         </div>
         <div class="row">
             <p>
-               @Model.Text
+               @Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Text))
             </p>
         </div>
         <hr />
