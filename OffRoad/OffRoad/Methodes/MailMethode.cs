@@ -21,7 +21,7 @@ namespace OffRoad.Methodes
             smtp.Host = "smtp.vilaine.com";
             smtp.Port = 25;
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new System.Net.NetworkCredential ("offroaddev@vilaine.fr", "offroad2016");
+            smtp.Credentials = new System.Net.NetworkCredential ("offroad@vilaine.fr", "offroad2016");
             // Enter seders User name and password 
             smtp.EnableSsl = false;
             smtp.Send(mail); 
