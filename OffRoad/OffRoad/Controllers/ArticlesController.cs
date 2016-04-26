@@ -125,6 +125,7 @@ namespace OffRoad.Controllers
         // GET: Articles/Edit/5
         public ActionResult Edit(int? id)
         {
+            ViewBag.Categories = db.Categorys.ToList();
             if (id == null)
             {
                return View("Error");

@@ -46,7 +46,14 @@
                         </a>
                     </div>
                     <div class="row">
-                        <span id="article-corps">@Html.DisplayFor(model => item.Text).ToString()</span>
+                        @if (item.Text.Length > 100)
+                        {
+                            <span id="article-corps">@Html.DisplayFor(model => item.Text).ToString().Substring(0,100) ...</span>
+                        }
+                        else
+                        {
+                            <span id="article-corps">@Html.DisplayFor(model => item.Text).ToString()</span>
+                        }
                     </div>
                 </div>
             </div>
