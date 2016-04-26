@@ -48,11 +48,11 @@
                     <div class="row">
                         @if (item.Text.Length > 100)
                         {
-                            @Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Text.Substring(0, 100) + " ..."))
+                            <span id="article-corps">@Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Text.Substring(0, 100) + " ..."))</span>
                         }
                         else
                         {
-                            @Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Text))
+                            <span id="article-corps">@Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Text))</span>
                         }
                     </div>
                 </div>
