@@ -34,9 +34,9 @@ namespace OffRoad.Controllers
         {
             try
             {
-                string subject = String.Format("[Contact] {0} {1} {2}", email.LastName, email.FirstName, email.Phone); 
-                mailMethode.SendMail(email.Mail, subject, email.Message);
-                return View("Index");
+                //string subject = String.Format("[Contact] {0} {1} {2}", email.LastName, email.FirstName, email.Phone); 
+                //mailMethode.SendMail(email.Mail, subject, email.Message);
+                return RedirectToAction("Index", "Home");
             }
             catch
             {
