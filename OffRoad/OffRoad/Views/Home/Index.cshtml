@@ -46,7 +46,9 @@
                         </a>
                     </div>
                     <div class="row">
-                        <span id="article-corps">@Html.DisplayFor(model => item.Text).ToString()</span>
+                        <span id="article-corps">
+                            @Html.Raw(System.Web.HttpUtility.HtmlDecode(item.Text))
+                        </span>                 
                     </div>
                 </div>
             </div>

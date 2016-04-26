@@ -12,18 +12,18 @@ namespace OffRoad.Methodes
         {
             MailMessage mail = new MailMessage();
             mail.To.Add(to);
-            mail.From = new MailAddress("Offroaddev@gmail.com");
+            mail.From = new MailAddress("offroad@vilaine.fr");
             mail.Subject = subject;
             string Body = body;
             mail.Body = Body;
             mail.IsBodyHtml = true;
             SmtpClient smtp = new SmtpClient();
-            smtp.Host = "smtp.gmail.com";
+            smtp.Host = "smtp.vilaine.com";
             smtp.Port = 25;
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new System.Net.NetworkCredential ("Offroaddev@gmail.com", "Offroad12345");
+            smtp.Credentials = new System.Net.NetworkCredential ("offroaddev@vilaine.fr", "offroad2016");
             // Enter seders User name and password 
-            smtp.EnableSsl = true;
+            smtp.EnableSsl = false;
             smtp.Send(mail); 
         }
     }

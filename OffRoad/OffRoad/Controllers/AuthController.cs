@@ -61,7 +61,6 @@ namespace OffRoad.Controllers
             {
                return View("Error");
             }
-            return View();
         }
 
         [HttpGet]

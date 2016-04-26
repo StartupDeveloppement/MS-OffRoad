@@ -36,8 +36,7 @@ namespace OffRoad.Controllers
                 Roles role = roleProvider.GetRoleForUser(user);
                 ViewBag.Role = role.Id;
             }
-           
-            return View(db.Events.ToList());
+            return View(db.Events.OrderBy(b => b.BeginDate).ToList());
         }
 
         // GET: Events/Details/5
@@ -83,7 +82,7 @@ namespace OffRoad.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Description,BeginDate,EndDate,Place,Owner")] Event evenement)
+        public ActionResult Create([Bind(Include = "Id,Title,Description,BeginDate,EndDate,CreateDate,Place,Owner")] Event evenement)
         {
             User user = db.Users.FirstOrDefault(u => u.NickName == User.Identity.Name);
             ModelState.Remove("Owner");
